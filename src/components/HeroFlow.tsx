@@ -1,18 +1,6 @@
-import { GitBranch, Send, Timer, Webhook } from 'lucide-react'
+import { CalendarCheck, Database, Mail, Sparkles, Split, Zap } from 'lucide-react'
 import type { ComponentType } from 'react'
 import ScaledMockup from './ScaledMockup'
-
-function Slack({ className = '', strokeWidth }: { className?: string; strokeWidth?: number }) {
-  void strokeWidth
-  return (
-    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden="true">
-      <path d="M6 15a2 2 0 1 1-2-2h2v2Zm1 0a2 2 0 0 1 4 0v5a2 2 0 1 1-4 0v-5Z" />
-      <path d="M9 6a2 2 0 1 1 2-2v2H9Zm0 1a2 2 0 0 1 0 4H4a2 2 0 1 1 0-4h5Z" />
-      <path d="M18 9a2 2 0 1 1 2 2h-2V9Zm-1 0a2 2 0 0 1-4 0V4a2 2 0 1 1 4 0v5Z" />
-      <path d="M15 18a2 2 0 1 1-2 2v-2h2Zm0-1a2 2 0 0 1 0-4h5a2 2 0 1 1 0 4h-5Z" />
-    </svg>
-  )
-}
 
 interface FlowNode {
   x: number
@@ -23,21 +11,25 @@ interface FlowNode {
   ring: string
 }
 
+// An original lead-qualification pipeline: New Lead → AI Qualify → Score,
+// which branches Hot / Cold and merges back into Update CRM.
 const NODES: FlowNode[] = [
-  { x: 95, y: 168, icon: Webhook, label: 'Webhook', tint: 'text-emerald-500', ring: 'ring-emerald-500/20' },
-  { x: 300, y: 168, icon: GitBranch, label: 'If / Else', tint: 'text-gold-600', ring: 'ring-gold-500/25' },
-  { x: 520, y: 168, icon: Timer, label: 'Wait', tint: 'text-ink-700', ring: 'ring-ink-900/10' },
-  { x: 760, y: 84, icon: Send, label: 'Send Email', tint: 'text-sky-500', ring: 'ring-sky-500/20' },
-  { x: 760, y: 252, icon: Slack, label: 'Slack', tint: 'text-[#611f69]', ring: 'ring-[#611f69]/20' },
+  { x: 85, y: 168, icon: Zap, label: 'New Lead', tint: 'text-gold-600', ring: 'ring-gold-500/25' },
+  { x: 255, y: 168, icon: Sparkles, label: 'AI Qualify', tint: 'text-violet-500', ring: 'ring-violet-500/20' },
+  { x: 420, y: 168, icon: Split, label: 'Score', tint: 'text-ink-700', ring: 'ring-ink-900/10' },
+  { x: 620, y: 92, icon: CalendarCheck, label: 'Book Call', tint: 'text-emerald-500', ring: 'ring-emerald-500/20' },
+  { x: 620, y: 244, icon: Mail, label: 'Nurture', tint: 'text-sky-500', ring: 'ring-sky-500/20' },
+  { x: 800, y: 168, icon: Database, label: 'Update CRM', tint: 'text-gold-600', ring: 'ring-gold-500/25' },
 ]
 
 // shared path strings: used for both the drawn wire and the traveling pulse
 const P = {
-  hook: 'M123 168 L272 168',
-  yes: 'M328 158 C 392 148, 432 166, 492 164',
-  no: 'M328 178 C 392 190, 432 172, 492 172',
-  email: 'M548 166 C 622 138, 668 88, 732 84',
-  slack: 'M548 174 C 622 210, 668 248, 732 252',
+  a: 'M112 168 L228 168',
+  b: 'M282 168 L393 168',
+  hot: 'M447 158 C 510 140, 545 98, 593 94',
+  cold: 'M447 178 C 510 200, 545 240, 593 242',
+  hotMerge: 'M647 94 C 710 98, 745 150, 773 160',
+  coldMerge: 'M647 242 C 710 238, 745 186, 773 176',
 }
 
 function Wire({ d, color, dash = '6 8' }: { d: string; color: string; dash?: string }) {
@@ -70,9 +62,8 @@ function Pulse({ path, color, dur, begin = 0 }: { path: string; color: string; d
   )
 }
 
-/** Light, animated automation-flow panel that replaces the dark hero mockup:
- *  Webhook → If/Else (Yes/No) → Wait → Send Email / Slack, with data pulses
- *  traveling along the wires. */
+/** Light, animated automation-flow panel on the hero. Original lead-scoring
+ *  pipeline with data pulses traveling along the wires. */
 export default function HeroFlow() {
   return (
     <ScaledMockup designWidth={900}>
@@ -80,8 +71,8 @@ export default function HeroFlow() {
         {/* header */}
         <div className="mb-1 flex items-center justify-between px-1">
           <div>
-            <p className="text-[13px] font-medium text-ink-900">Lead Follow-Up Automation</p>
-            <p className="text-[10px] text-ink-700/45">Running · triggers on new lead</p>
+            <p className="text-[13px] font-medium text-ink-900">Lead Qualification Autopilot</p>
+            <p className="text-[10px] text-ink-700/45">Running · scoring new leads</p>
           </div>
           <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-1 text-[10px] font-medium text-emerald-600 ring-1 ring-emerald-500/20">
             <span className="h-1.5 w-1.5 animate-pulse-glow rounded-full bg-emerald-500" />
@@ -103,24 +94,26 @@ export default function HeroFlow() {
 
           {/* wires + pulses */}
           <svg className="absolute inset-0 h-full w-full" viewBox="0 0 900 300" fill="none" aria-hidden="true">
-            <Wire d={P.hook} color="#8a8f98" />
-            <Wire d={P.yes} color="#22c55e" />
-            <Wire d={P.no} color="#ef4444" />
-            <Wire d={P.email} color="#8a8f98" />
-            <Wire d={P.slack} color="#8a8f98" />
+            <Wire d={P.a} color="#8a8f98" />
+            <Wire d={P.b} color="#8a8f98" />
+            <Wire d={P.hot} color="#f97316" />
+            <Wire d={P.cold} color="#0ea5e9" />
+            <Wire d={P.hotMerge} color="#8a8f98" />
+            <Wire d={P.coldMerge} color="#8a8f98" />
 
-            <Pulse path={P.hook} color="#f5a81c" dur={2.2} />
-            <Pulse path={P.yes} color="#22c55e" dur={2} begin={0.4} />
-            <Pulse path={P.no} color="#ef4444" dur={2.4} begin={1.1} />
-            <Pulse path={P.email} color="#f5a81c" dur={2.1} begin={0.8} />
-            <Pulse path={P.slack} color="#f5a81c" dur={2.3} begin={1.4} />
+            <Pulse path={P.a} color="#f5a81c" dur={2} />
+            <Pulse path={P.b} color="#f5a81c" dur={2.1} begin={0.5} />
+            <Pulse path={P.hot} color="#f97316" dur={2} begin={0.9} />
+            <Pulse path={P.cold} color="#0ea5e9" dur={2.3} begin={1.3} />
+            <Pulse path={P.hotMerge} color="#f5a81c" dur={2.1} begin={1.7} />
+            <Pulse path={P.coldMerge} color="#f5a81c" dur={2.4} begin={2} />
 
             {/* branch labels */}
             <g className="font-medium">
-              <rect x="382" y="128" width="34" height="16" rx="8" fill="#22c55e" fillOpacity="0.12" />
-              <text x="399" y="140" textAnchor="middle" fontSize="10" fill="#16a34a">Yes</text>
-              <rect x="384" y="196" width="30" height="16" rx="8" fill="#ef4444" fillOpacity="0.12" />
-              <text x="399" y="208" textAnchor="middle" fontSize="10" fill="#dc2626">No</text>
+              <rect x="486" y="112" width="34" height="16" rx="8" fill="#f97316" fillOpacity="0.12" />
+              <text x="503" y="124" textAnchor="middle" fontSize="10" fill="#ea580c">Hot</text>
+              <rect x="484" y="206" width="40" height="16" rx="8" fill="#0ea5e9" fillOpacity="0.12" />
+              <text x="504" y="218" textAnchor="middle" fontSize="10" fill="#0284c7">Cold</text>
             </g>
           </svg>
 
