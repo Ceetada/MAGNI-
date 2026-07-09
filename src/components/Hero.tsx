@@ -1,12 +1,13 @@
 import { ArrowRight, Sparkles } from 'lucide-react'
-import HeroBackground from './HeroBackground'
+import HeroBackgroundScenic from './HeroBackgroundScenic'
 import WorkflowMockup from './WorkflowMockup'
 import ScaledMockup from './ScaledMockup'
 
 export default function Hero() {
   return (
     <section className="relative flex min-h-[100svh] flex-col overflow-hidden bg-[#fafafa]">
-      <HeroBackground />
+      {/* Prototype backdrop. Restore <HeroBackground /> (from ./HeroBackground) to revert. */}
+      <HeroBackgroundScenic />
 
       {/* spacer for fixed navbar */}
       <div className="h-[64px] shrink-0 sm:h-[76px]" />
@@ -19,7 +20,7 @@ export default function Hero() {
 
         <h1 className="mt-5 max-w-4xl text-[38px] font-medium leading-[1.08] tracking-tight text-ink-900 min-[400px]:text-[44px] sm:text-6xl lg:text-7xl">
           <span className="block animate-fade-up">We Build AI Systems That</span>
-          <span className="text-gradient-gold block animate-fade-up [animation-delay:120ms]">
+          <span className="block animate-fade-up text-gold-700 [animation-delay:120ms]">
             Save Time, Capture Leads,
           </span>
           <span className="block animate-fade-up [animation-delay:240ms]">and Scale Businesses.</span>
