@@ -75,31 +75,22 @@ export default function HeroBackgroundScenic() {
         {/* atmospheric haze along the horizon for depth */}
         <rect x="0" y="512" width="1440" height="80" fill="#f6ead0" opacity="0.55" />
 
-        {/* mid hills */}
-        <path
-          fill="#e6c98d"
-          d="M0 648 C 220 600 420 664 640 636 C 860 608 1060 664 1440 624 L1440 900 L0 900 Z"
-        />
+        {/* mid hills — wavy top scrolling left */}
+        <WaveHill topY={648} amp={17} fill="#e6c98d" dur={9} dir="left" animate={motionOK} />
 
         {/* far, lighter pines nestled on the mid hills */}
         <g fill="#8a7440" opacity="0.85">
-          <PineGroup x={215} baseY={648} scale={0.7} animate={motionOK} dur={7} delay={0} amp={1.7} />
-          <PineGroup x={262} baseY={654} scale={0.55} animate={motionOK} dur={8} delay={2} amp={1.9} />
-          <PineGroup x={1215} baseY={646} scale={0.62} animate={motionOK} dur={6.5} delay={1} amp={1.6} />
-          <PineGroup x={1168} baseY={652} scale={0.5} animate={motionOK} dur={7.5} delay={3} amp={2} />
+          <PineGroup x={215} baseY={662} scale={0.7} animate={motionOK} dur={7} delay={0} amp={1.7} />
+          <PineGroup x={262} baseY={668} scale={0.55} animate={motionOK} dur={8} delay={2} amp={1.9} />
+          <PineGroup x={1215} baseY={660} scale={0.62} animate={motionOK} dur={6.5} delay={1} amp={1.6} />
+          <PineGroup x={1168} baseY={666} scale={0.5} animate={motionOK} dur={7.5} delay={3} amp={2} />
         </g>
 
-        {/* near hills */}
-        <path
-          fill="#d3a94c"
-          d="M0 742 C 280 700 540 762 800 732 C 1060 704 1260 760 1440 726 L1440 900 L0 900 Z"
-        />
+        {/* near hills — wavy top scrolling right, a touch stronger */}
+        <WaveHill topY={742} amp={22} fill="#d3a94c" dur={6.5} dir="right" animate={motionOK} />
 
-        {/* foreground ridge */}
-        <path
-          fill="#7c6733"
-          d="M0 826 C 320 800 720 840 1010 818 C 1210 804 1350 828 1440 818 L1440 900 L0 900 Z"
-        />
+        {/* foreground ridge — wavy top scrolling left, slow */}
+        <WaveHill topY={826} amp={15} fill="#7c6733" dur={12} dir="left" animate={motionOK} />
 
         {/* near pine clusters framing the lower corners */}
         <g fill="#54471f">
@@ -168,6 +159,48 @@ function Wave({
 
   return (
     <path d={d} fill="none" stroke={color} strokeWidth={width} strokeOpacity={opacity} strokeLinecap="round">
+      {animate && (
+        <animateTransform
+          attributeName="transform"
+          type="translate"
+          from={from}
+          to={to}
+          dur={`${dur}s`}
+          repeatCount="indefinite"
+        />
+      )}
+    </path>
+  )
+}
+
+/** A filled hill whose wavy top edge scrolls sideways forever, so the crests
+ *  visibly travel like surface waves. The wave repeats every 480 user units and
+ *  the shape overhangs both sides, so translating one period loops seamlessly. */
+function WaveHill({
+  topY,
+  amp,
+  fill,
+  dur,
+  dir,
+  animate,
+}: {
+  topY: number
+  amp: number
+  fill: string
+  dur: number
+  dir: 'left' | 'right'
+  animate: boolean
+}) {
+  // wavy top from x=-1440 to x=2880 (9 periods of 480), filled down past the base
+  let d = `M -1440 960 L -1440 ${topY}`
+  for (let i = 0; i < 18; i++) {
+    d += ` q 120 ${i % 2 === 0 ? -amp : amp} 240 0`
+  }
+  d += ' L 2880 960 Z'
+  const from = dir === 'left' ? '0 0' : '-480 0'
+  const to = dir === 'left' ? '-480 0' : '0 0'
+  return (
+    <path d={d} fill={fill}>
       {animate && (
         <animateTransform
           attributeName="transform"
