@@ -83,10 +83,10 @@ export default function HeroBackgroundScenic() {
 
         {/* far, lighter pines nestled on the mid hills */}
         <g fill="#8a7440" opacity="0.85">
-          <PineGroup x={215} baseY={648} scale={0.7} />
-          <PineGroup x={262} baseY={654} scale={0.55} />
-          <PineGroup x={1215} baseY={646} scale={0.62} />
-          <PineGroup x={1168} baseY={652} scale={0.5} />
+          <PineGroup x={215} baseY={648} scale={0.7} animate={motionOK} dur={7} delay={0} amp={1.7} />
+          <PineGroup x={262} baseY={654} scale={0.55} animate={motionOK} dur={8} delay={2} amp={1.9} />
+          <PineGroup x={1215} baseY={646} scale={0.62} animate={motionOK} dur={6.5} delay={1} amp={1.6} />
+          <PineGroup x={1168} baseY={652} scale={0.5} animate={motionOK} dur={7.5} delay={3} amp={2} />
         </g>
 
         {/* near hills */}
@@ -103,12 +103,12 @@ export default function HeroBackgroundScenic() {
 
         {/* near pine clusters framing the lower corners */}
         <g fill="#54471f">
-          <PineGroup x={55} baseY={766} scale={0.95} />
-          <PineGroup x={128} baseY={782} scale={1.35} />
-          <PineGroup x={205} baseY={772} scale={0.85} />
-          <PineGroup x={1392} baseY={766} scale={1.05} />
-          <PineGroup x={1315} baseY={784} scale={1.3} />
-          <PineGroup x={1245} baseY={772} scale={0.8} />
+          <PineGroup x={55} baseY={766} scale={0.95} animate={motionOK} dur={6} delay={1} amp={1.1} />
+          <PineGroup x={128} baseY={782} scale={1.35} animate={motionOK} dur={7.2} delay={0} amp={0.9} />
+          <PineGroup x={205} baseY={772} scale={0.85} animate={motionOK} dur={6.5} delay={2.5} amp={1.3} />
+          <PineGroup x={1392} baseY={766} scale={1.05} animate={motionOK} dur={6.8} delay={1.5} amp={1.1} />
+          <PineGroup x={1315} baseY={784} scale={1.3} animate={motionOK} dur={7.5} delay={3} amp={0.9} />
+          <PineGroup x={1245} baseY={772} scale={0.8} animate={motionOK} dur={6.2} delay={2} amp={1.3} />
         </g>
 
         {/* distant birds */}
@@ -182,9 +182,27 @@ function Wave({
   )
 }
 
-function PineGroup({ x, baseY, scale = 1 }: { x: number; baseY: number; scale?: number }) {
+function PineGroup({
+  x,
+  baseY,
+  scale = 1,
+  animate = false,
+  dur = 6,
+  delay = 0,
+  amp = 1.2,
+}: {
+  x: number
+  baseY: number
+  scale?: number
+  animate?: boolean
+  dur?: number
+  delay?: number
+  amp?: number
+}) {
   const h = 120 * scale
   const w = 46 * scale
+  // sway pivots from the trunk base (x, baseY) like wind through the canopy
+  const values = `0 ${x} ${baseY}; ${amp} ${x} ${baseY}; 0 ${x} ${baseY}; ${-amp} ${x} ${baseY}; 0 ${x} ${baseY}`
   return (
     <path
       d={`M ${x} ${baseY}
@@ -200,7 +218,21 @@ function PineGroup({ x, baseY, scale = 1 }: { x: number; baseY: number; scale?: 
           L ${x} ${baseY - h * 0.42}
           L ${x + w * 0.5} ${baseY}
           Z`}
-    />
+    >
+      {animate && (
+        <animateTransform
+          attributeName="transform"
+          type="rotate"
+          values={values}
+          keyTimes="0;0.25;0.5;0.75;1"
+          calcMode="spline"
+          keySplines="0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1; 0.45 0 0.55 1"
+          dur={`${dur}s`}
+          begin={`-${delay}s`}
+          repeatCount="indefinite"
+        />
+      )}
+    </path>
   )
 }
 
