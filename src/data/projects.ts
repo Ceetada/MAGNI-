@@ -11,15 +11,18 @@ import {
   Mic,
   PenLine,
   PhoneCall,
+  ReceiptText,
   ScanSearch,
   Search,
   Send,
+  Settings,
   ShieldCheck,
   Workflow,
   type LucideIcon,
 } from 'lucide-react'
 import SocialContentDiagram from '../components/diagrams/SocialContentDiagram'
 import RealEstateDiagram from '../components/diagrams/RealEstateDiagram'
+import ExpenseTrackerDiagram from '../components/diagrams/ExpenseTrackerDiagram'
 
 export interface WorkflowStep {
   title: string
@@ -188,54 +191,68 @@ export const projects: Project[] = [
     diagram: RealEstateDiagram,
   },
   {
-    slug: 'crm-workflow-automation',
+    slug: 'ai-expense-tracker',
     index: '03',
-    title: 'CRM & Workflow Automation Suite',
-    tagline: 'Every tool talking to every other tool, automatically.',
-    category: 'Workflow Automation',
+    title: 'AI Expense Tracking Assistant',
+    tagline: 'Snap a receipt in Telegram and it is logged, categorized, and flagged, automatically.',
+    category: 'Finance Automation',
     summary:
-      'A connected system that eliminates duplicate data entry by syncing the CRM, invoicing, project management, and reporting tools in real time.',
+      'A Telegram assistant that reads receipt photos and expense messages, logs structured data into Google Sheets, alerts a manager on high-value purchases, and answers spending questions on demand.',
     description:
-      'This client ran five different tools that never talked to each other, forcing the team to manually copy data between them all day. We built a central automation layer that keeps every system in sync. New deals create projects, signed contracts trigger invoices, and completed jobs update reporting dashboards without anyone lifting a finger.',
-    icon: Database,
-    stack: ['HubSpot', 'Make', 'Airtable', 'QuickBooks', 'Slack API'],
+      'It started as a simple idea: what if you could send a receipt photo to a Telegram bot and have everything logged automatically? Built with n8n, Telegram, Gemini, Google Sheets, and Gmail, this assistant reads a receipt or message, extracts the details, files them in one organized sheet, and keeps a manager in the loop, so receipts stop getting lost in chats, inboxes, and paper files.',
+    icon: ReceiptText,
+    stack: ['n8n', 'Telegram Bot API', 'Google Gemini', 'Google Sheets', 'Gmail'],
     results: [
-      { label: 'Manual data entry cut', value: '90%' },
-      { label: 'Admin hours saved / mo', value: '60 hrs' },
-      { label: 'Reporting accuracy', value: '99.9%' },
+      { label: 'Fields captured per expense', value: '12' },
+      { label: 'Manual data entry', value: '0' },
+      { label: 'High-value alerts', value: 'Auto' },
     ],
     workflow: [
       {
-        title: 'Trigger',
+        title: 'Telegram Trigger',
         description:
-          'A deal closes in the CRM, kicking off the automation with the client’s full record attached.',
-        icon: Workflow,
-      },
-      {
-        title: 'Create',
-        description:
-          'A project is auto-generated in the project management tool with tasks, deadlines, and the right team assigned.',
-        icon: Database,
-      },
-      {
-        title: 'Invoice',
-        description:
-          'Contract terms are read automatically and an invoice is generated and sent without any manual entry.',
+          'The workflow starts the moment a user sends a receipt photo or an expense message to the bot.',
         icon: MessageSquareText,
       },
       {
-        title: 'Sync Everywhere',
+        title: 'Workflow Settings',
         description:
-          'Every connected tool updates in parallel, so the CRM, finance, and delivery teams are always looking at the same data.',
+          'Reusable settings live in one place: the sheet name, default currency, alert threshold, and the manager’s email.',
+        icon: Settings,
+      },
+      {
+        title: 'AI Expense Agent',
+        description:
+          'Gemini reads the receipt or message, understands the intent, extracts the expense details, and decides which tool to use next.',
+        icon: Bot,
+      },
+      {
+        title: 'Log Expense to Sheet',
+        description:
+          'The extracted data is saved into Google Sheets: vendor, total, tax, category, confidence score, review status, and message ID.',
+        icon: ScanSearch,
+      },
+      {
+        title: 'Read Recent Expenses',
+        description:
+          'Ask “How much did I spend today?” and the bot reads the sheet and summarizes the answer instead of making you scroll.',
         icon: Database,
       },
       {
-        title: 'Report',
+        title: 'Send Manager Alert',
         description:
-          'A live dashboard rolls all of it up automatically, replacing the weekly manual reporting spreadsheet.',
-        icon: Workflow,
+          'When a purchase lands above the threshold, an email alert goes straight to the manager for approval.',
+        icon: MailCheck,
+      },
+      {
+        title: 'Send Telegram Reply',
+        description:
+          'The bot replies in Telegram with a clear confirmation or a tidy spending summary, so the user always knows it landed.',
+        icon: MessageSquareText,
       },
     ],
+    why: 'Instead of receipts getting lost in chats, emails, or paper files, everything is stored in one organized sheet that can be searched, reviewed, and summarized later. A team member can buy supplies, fuel, or travel, snap the receipt, and the system logs it and alerts the manager if it is over the approval limit. A manager can even ask “How much did we spend this week?” or “What was the biggest expense?” and get a clear answer back. It makes expense tracking faster, cleaner, and far easier to manage.',
+    diagram: ExpenseTrackerDiagram,
   },
   {
     slug: 'ai-voice-receptionist',
