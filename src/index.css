@@ -80,6 +80,23 @@ body {
   -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
 }
 
+/* One-shot wiggle for the CTA "deck of cards" hover */
+@keyframes deck-wiggle {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  30% {
+    transform: rotate(-1.4deg);
+  }
+  60% {
+    transform: rotate(0.9deg);
+  }
+  80% {
+    transform: rotate(-0.4deg);
+  }
+}
+
 /* Marching dashes along SVG workflow connectors */
 .animate-dash-flow {
   animation: dash-flow 1.4s linear infinite;
