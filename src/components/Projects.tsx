@@ -5,7 +5,7 @@ import Reveal from './Reveal'
 
 export default function Projects() {
   return (
-    <section id="work" className="relative overflow-hidden bg-white py-24 sm:py-32">
+    <section id="work" className="relative overflow-hidden bg-[#f4f4f5] py-24 sm:py-32">
       <div className="pointer-events-none absolute left-1/2 top-0 h-[400px] w-[900px] -translate-x-1/2 rounded-full bg-gold-300/10 blur-[140px]" />
 
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">

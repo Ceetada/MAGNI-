@@ -49,7 +49,7 @@ const SERVICES: Service[] = [
 
 export default function Services() {
   return (
-    <section id="services" className="relative bg-[#f4f4f5] py-24 sm:py-32">
+    <section id="services" className="relative bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
         <Reveal>
           <span className="text-[12px] font-medium uppercase tracking-widest text-gold-700">What we do</span>
