@@ -4,9 +4,9 @@ import { Menu, X } from 'lucide-react'
 import Logo from './Logo'
 
 const NAV_LINKS = [
-  { label: 'Services', hash: '#services' },
-  { label: 'Work', hash: '#work' },
   { label: 'About', hash: '#about' },
+  { label: 'Work', hash: '#work' },
+  { label: 'Services', hash: '#services' },
 ]
 
 export default function Navbar() {
