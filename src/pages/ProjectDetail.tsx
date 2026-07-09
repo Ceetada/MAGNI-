@@ -95,6 +95,15 @@ export default function ProjectDetail() {
             </h2>
           </Reveal>
 
+          {project.diagram && (
+            <Reveal delay={80} className="mt-10">
+              <project.diagram />
+              <p className="mt-3 text-center text-[12px] text-ink-700/45">
+                The n8n canvas behind this system — every node runs automatically.
+              </p>
+            </Reveal>
+          )}
+
           <div className="relative mt-14">
             <div
               className="absolute bottom-6 left-[21px] top-6 w-px bg-gradient-to-b from-gold-500/70 via-gold-500/25 to-transparent sm:left-[27px]"

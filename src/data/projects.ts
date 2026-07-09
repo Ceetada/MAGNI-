@@ -1,3 +1,4 @@
+import type { ComponentType } from 'react'
 import {
   ClipboardList,
   ImagePlus,
@@ -12,6 +13,7 @@ import {
   Database,
   type LucideIcon,
 } from 'lucide-react'
+import SocialContentDiagram from '../components/diagrams/SocialContentDiagram'
 
 export interface WorkflowStep {
   title: string
@@ -35,6 +37,8 @@ export interface Project {
   why?: string
   /** Optional demo video (mp4 path under /public or a hosted URL). */
   video?: string
+  /** Optional canvas-style diagram component rendered above the workflow steps. */
+  diagram?: ComponentType
 }
 
 /**
@@ -105,6 +109,7 @@ export const projects: Project[] = [
       },
     ],
     why: 'Instead of relying on one AI model to do everything, the workflow is split into specialized agents — each doing one job well. This produces higher-quality content, improves factual accuracy, and makes the system far more reliable. The result is a scalable content engine that dramatically reduces the time required to research, write, design, and publish professional content, while keeping a human in control of the final output.',
+    diagram: SocialContentDiagram,
   },
   {
     slug: 'ai-support-chatbot',
