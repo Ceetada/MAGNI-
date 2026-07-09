@@ -72,12 +72,12 @@ export default function Services() {
           </p>
         </Reveal>
 
-        <div className="mt-12 grid grid-cols-1 gap-5 sm:mt-14 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 flex flex-wrap justify-center gap-5 sm:mt-14">
           {SERVICES.map((service, i) => (
             <Reveal
               key={service.title}
               delay={(i % 3) * 80}
-              className={i === SERVICES.length - 1 ? 'md:col-span-2 lg:col-span-1' : ''}
+              className="w-full md:w-[calc((100%-20px)/2)] lg:w-[calc((100%-40px)/3)]"
             >
               <div className="group relative flex h-full flex-col overflow-hidden rounded-3xl bg-white p-7 shadow-[0_1px_3px_rgba(12,13,16,0.06)] ring-1 ring-ink-900/5 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_24px_60px_-16px_rgba(12,13,16,0.16)] hover:ring-gold-500/30 sm:p-8">
                 {/* gradient bloom revealed on hover */}
