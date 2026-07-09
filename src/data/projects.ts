@@ -1,5 +1,12 @@
 import {
+  ClipboardList,
+  ImagePlus,
+  MailCheck,
   MessageSquareText,
+  PenLine,
+  Search,
+  Send,
+  ShieldCheck,
   Workflow,
   PhoneCall,
   Database,
@@ -24,6 +31,10 @@ export interface Project {
   stack: string[]
   results: { label: string; value: string }[]
   workflow: WorkflowStep[]
+  /** Optional "Why build it this way?" explainer shown after the workflow. */
+  why?: string
+  /** Optional demo video (mp4 path under /public or a hosted URL). */
+  video?: string
 }
 
 /**
@@ -33,54 +44,67 @@ export interface Project {
  */
 export const projects: Project[] = [
   {
-    slug: 'ai-lead-capture',
+    slug: 'social-media-content-automation',
     index: '01',
-    title: 'AI Lead Capture & Follow-Up System',
-    tagline: 'Never lose another lead to a slow response time.',
-    category: 'Lead Generation',
+    title: 'AI-Powered Social Media Content Automation System',
+    tagline: 'A multi-agent content engine that researches, writes, designs, and publishes — with a human in control.',
+    category: 'Content Automation',
     summary:
-      'An automated pipeline that captures new leads from every channel, qualifies them instantly, and follows up before the competition even wakes up.',
+      'A multi-agent n8n pipeline that researches topics, writes platform-specific posts, generates matching images, and publishes to LinkedIn — pausing for human approval before anything goes live.',
     description:
-      'Built for a fast-growing service business losing deals to slow response times, this system pulls leads from forms, ads, and DMs into a single pipeline, scores them automatically, and triggers instant personalized follow-up across SMS and email — all before a human ever touches the lead.',
+      'Most people are still manually prompting AI every time they need to create content. This system goes a step further and automates the entire content creation pipeline. Built in n8n, it uses multiple AI agents working together — each responsible for a specific task rather than relying on a single prompt — to research, write, design, and publish professional content consistently.',
     icon: Workflow,
-    stack: ['GoHighLevel', 'OpenAI', 'Twilio', 'Zapier', 'Google Sheets'],
+    stack: ['n8n', 'Google Gemini', 'Claude', 'Nano Banana', 'Gmail', 'LinkedIn'],
     results: [
-      { label: 'Response time', value: '< 60 sec' },
-      { label: 'Lead-to-call rate', value: '+42%' },
-      { label: 'Hours saved / week', value: '15 hrs' },
+      { label: 'Specialized AI agents', value: '4' },
+      { label: 'Posts human-approved', value: '100%' },
+      { label: 'Manual publishing steps', value: '0' },
     ],
     workflow: [
       {
-        title: 'Capture',
+        title: 'Topic Generation',
         description:
-          'Every lead source — website forms, paid ads, DMs, and calls — feeds into one unified intake pipeline in real time.',
-        icon: Database,
+          'A form submission kicks off the workflow. An AI agent proposes a set of content topics around the chosen theme, ready for review.',
+        icon: ClipboardList,
       },
       {
-        title: 'Qualify',
+        title: 'Topic Approval',
         description:
-          'An AI model reads each submission, scores intent, and tags the lead by service type and urgency automatically.',
-        icon: MessageSquareText,
+          'The workflow pauses and emails the proposed topics via Gmail. Nothing moves forward until a human picks the winner.',
+        icon: MailCheck,
       },
       {
-        title: 'Engage',
+        title: 'AI Research Agent',
         description:
-          'A personalized SMS and email sequence fires within seconds, written in the brand voice and adapted to what the lead asked for.',
-        icon: PhoneCall,
+          'Google Gemini researches the approved topic and gathers relevant, up-to-date information to ground the post in facts.',
+        icon: Search,
       },
       {
-        title: 'Route & Notify',
+        title: 'AI Writing Agent',
         description:
-          'Hot leads are pushed straight to the sales team’s phone with full context, while cooler leads enter a nurture sequence.',
-        icon: Workflow,
+          'Claude transforms the research into a well-structured, platform-specific post written for LinkedIn — not a generic AI blurb.',
+        icon: PenLine,
       },
       {
-        title: 'Sync',
+        title: 'Post Approval',
         description:
-          'Every interaction logs back to the CRM automatically, keeping pipeline data clean without manual entry.',
-        icon: Database,
+          'Before anything is published, the finished draft is sent for sign-off via Gmail, ensuring full control over every post.',
+        icon: ShieldCheck,
+      },
+      {
+        title: 'AI Image Generation',
+        description:
+          'Gemini Flash Image (Nano Banana) creates a custom image that matches the content — no stock photos, no manual design work.',
+        icon: ImagePlus,
+      },
+      {
+        title: 'Automatic Publishing',
+        description:
+          'Once approved, the workflow publishes the completed post with its image directly to LinkedIn, eliminating repetitive manual work.',
+        icon: Send,
       },
     ],
+    why: 'Instead of relying on one AI model to do everything, the workflow is split into specialized agents — each doing one job well. This produces higher-quality content, improves factual accuracy, and makes the system far more reliable. The result is a scalable content engine that dramatically reduces the time required to research, write, design, and publish professional content, while keeping a human in control of the final output.',
   },
   {
     slug: 'ai-support-chatbot',

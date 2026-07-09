@@ -120,16 +120,43 @@ export default function ProjectDetail() {
             </ol>
           </div>
 
+          {project.video && (
+            <Reveal delay={80} className="mt-16">
+              <span className="text-[12px] font-medium uppercase tracking-widest text-gold-700">
+                See it in action
+              </span>
+              <video
+                src={project.video}
+                controls
+                playsInline
+                preload="metadata"
+                className="mt-4 w-full rounded-2xl shadow-[0_24px_60px_-16px_rgba(12,13,16,0.25)] ring-1 ring-ink-900/10"
+              />
+            </Reveal>
+          )}
+
           <Reveal
             delay={100}
-            className="mt-14 flex items-start gap-3 rounded-2xl bg-gold-50 p-5 ring-1 ring-gold-500/20 sm:p-6"
+            className="mt-14 rounded-2xl bg-gold-50 p-5 ring-1 ring-gold-500/20 sm:p-6"
           >
-            <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-gold-600" />
-            <p className="text-[14px] leading-relaxed text-ink-700/80 sm:text-[15px]">
-              This is the exact system architecture we tailor to each client — the tools change, but the
-              philosophy stays the same: capture everything, respond instantly, and remove manual work wherever
-              automation can do it better.
-            </p>
+            {project.why ? (
+              <>
+                <h3 className="flex items-center gap-2.5 text-base font-medium text-ink-900 sm:text-lg">
+                  <CheckCircle2 className="h-5 w-5 shrink-0 text-gold-600" />
+                  Why build it this way?
+                </h3>
+                <p className="mt-3 text-[14px] leading-relaxed text-ink-700/80 sm:text-[15px]">{project.why}</p>
+              </>
+            ) : (
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-gold-600" />
+                <p className="text-[14px] leading-relaxed text-ink-700/80 sm:text-[15px]">
+                  This is the exact system architecture we tailor to each client — the tools change, but the
+                  philosophy stays the same: capture everything, respond instantly, and remove manual work
+                  wherever automation can do it better.
+                </p>
+              </div>
+            )}
           </Reveal>
         </div>
       </section>
