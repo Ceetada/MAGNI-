@@ -17,7 +17,8 @@ export default function Projects() {
             </h2>
           </div>
           <p className="max-w-sm text-sm text-ink-700/60 sm:text-right">
-            A look at four AI automation builds — click any project to see the full workflow behind it.
+            Four AI automation builds, each solving a real business problem. Click any project to see the
+            full workflow behind it.
           </p>
         </Reveal>
 

@@ -99,7 +99,7 @@ export default function ProjectDetail() {
             <Reveal delay={80} className="mt-10">
               <project.diagram />
               <p className="mt-3 text-center text-[12px] text-ink-700/45">
-                The n8n canvas behind this system — every node runs automatically.
+                The n8n canvas behind this system. Every node runs automatically.
               </p>
             </Reveal>
           )}
@@ -160,7 +160,7 @@ export default function ProjectDetail() {
               <div className="flex items-start gap-3">
                 <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-gold-600" />
                 <p className="text-[14px] leading-relaxed text-ink-700/80 sm:text-[15px]">
-                  This is the exact system architecture we tailor to each client — the tools change, but the
+                  This is the exact system architecture we tailor to each client. The tools change, but the
                   philosophy stays the same: capture everything, respond instantly, and remove manual work
                   wherever automation can do it better.
                 </p>

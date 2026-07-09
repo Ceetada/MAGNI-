@@ -20,7 +20,7 @@ export default function About() {
           <Reveal delay={80}>
             <p>
               At <span className="font-medium text-ink-900">Magni Automations</span>, we believe AI should do more
-              than look impressive — it should save time, reduce costs, and create measurable growth.
+              than look impressive. It should save time, reduce costs, and create measurable growth.
             </p>
           </Reveal>
           <Reveal delay={160}>

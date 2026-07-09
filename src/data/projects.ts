@@ -51,12 +51,12 @@ export const projects: Project[] = [
     slug: 'social-media-content-automation',
     index: '01',
     title: 'AI-Powered Social Media Content Automation System',
-    tagline: 'A multi-agent content engine that researches, writes, designs, and publishes — with a human in control.',
+    tagline: 'A multi-agent content engine that researches, writes, designs, and publishes, with a human in control of every post.',
     category: 'Content Automation',
     summary:
-      'A multi-agent n8n pipeline that researches topics, writes platform-specific posts, generates matching images, and publishes to LinkedIn — pausing for human approval before anything goes live.',
+      'A multi-agent n8n pipeline that researches topics, writes platform-specific posts, generates matching images, and publishes straight to LinkedIn. Nothing goes live until a human approves it.',
     description:
-      'Most people are still manually prompting AI every time they need to create content. This system goes a step further and automates the entire content creation pipeline. Built in n8n, it uses multiple AI agents working together — each responsible for a specific task rather than relying on a single prompt — to research, write, design, and publish professional content consistently.',
+      'Most people are still manually prompting AI every time they need to create content. This system goes a step further and automates the entire content creation pipeline. Built in n8n, it puts multiple AI agents to work as a team, each one responsible for a specific task, so content gets researched, written, designed, and published consistently instead of depending on a single prompt.',
     icon: Workflow,
     stack: ['n8n', 'Google Gemini', 'Claude', 'Nano Banana', 'Gmail', 'LinkedIn'],
     results: [
@@ -86,7 +86,7 @@ export const projects: Project[] = [
       {
         title: 'AI Writing Agent',
         description:
-          'Claude transforms the research into a well-structured, platform-specific post written for LinkedIn — not a generic AI blurb.',
+          'Claude transforms the research into a well-structured post written specifically for LinkedIn, not a generic AI blurb.',
         icon: PenLine,
       },
       {
@@ -98,7 +98,7 @@ export const projects: Project[] = [
       {
         title: 'AI Image Generation',
         description:
-          'Gemini Flash Image (Nano Banana) creates a custom image that matches the content — no stock photos, no manual design work.',
+          'Gemini Flash Image (Nano Banana) creates a custom image that matches the content. No stock photos, no manual design work.',
         icon: ImagePlus,
       },
       {
@@ -108,7 +108,7 @@ export const projects: Project[] = [
         icon: Send,
       },
     ],
-    why: 'Instead of relying on one AI model to do everything, the workflow is split into specialized agents — each doing one job well. This produces higher-quality content, improves factual accuracy, and makes the system far more reliable. The result is a scalable content engine that dramatically reduces the time required to research, write, design, and publish professional content, while keeping a human in control of the final output.',
+    why: 'Instead of relying on one AI model to do everything, the workflow is split into specialized agents that each do one job well. This produces higher-quality content, improves factual accuracy, and makes the system far more reliable. The result is a scalable content engine that dramatically reduces the time required to research, write, design, and publish professional content, while keeping a human in control of the final output.',
     diagram: SocialContentDiagram,
   },
   {
@@ -120,7 +120,7 @@ export const projects: Project[] = [
     summary:
       'A trained AI chatbot embedded on-site and in DMs that resolves common support questions instantly and escalates the rest with full context.',
     description:
-      'Trained on the client’s help docs, order data, and policies, this assistant answers the questions that used to eat up a support team’s day — order status, returns, product questions — and hands off anything complex to a human with the full conversation already summarized.',
+      'Trained on the client’s help docs, order data, and policies, this assistant answers the questions that used to eat up a support team’s day: order status, returns, and product questions. Anything complex gets handed to a human with the full conversation already summarized.',
     icon: MessageSquareText,
     stack: ['OpenAI', 'React', 'Supabase', 'Make', 'Slack API'],
     results: [
@@ -170,7 +170,7 @@ export const projects: Project[] = [
     summary:
       'A connected system that eliminates duplicate data entry by syncing the CRM, invoicing, project management, and reporting tools in real time.',
     description:
-      'This client ran five different tools that never talked to each other, forcing the team to manually copy data between them all day. We built a central automation layer that keeps every system in sync — new deals create projects, signed contracts trigger invoices, and completed jobs update reporting dashboards without anyone lifting a finger.',
+      'This client ran five different tools that never talked to each other, forcing the team to manually copy data between them all day. We built a central automation layer that keeps every system in sync. New deals create projects, signed contracts trigger invoices, and completed jobs update reporting dashboards without anyone lifting a finger.',
     icon: Database,
     stack: ['HubSpot', 'Make', 'Airtable', 'QuickBooks', 'Slack API'],
     results: [
@@ -220,7 +220,7 @@ export const projects: Project[] = [
     summary:
       'An AI voice agent that answers inbound calls, handles common questions, and books appointments directly into the calendar in real time.',
     description:
-      'Missed calls were costing this client real revenue every week. We deployed an AI voice receptionist that answers every call on the first ring, sounds natural on the phone, and books qualified appointments straight into the calendar — with a full transcript and recording sent to the team automatically.',
+      'Missed calls were costing this client real revenue every week. We deployed an AI voice receptionist that answers every call on the first ring, sounds natural on the phone, and books qualified appointments straight into the calendar, then sends the team a full transcript and recording automatically.',
     icon: PhoneCall,
     stack: ['Vapi', 'OpenAI', 'Cal.com', 'Twilio', 'Make'],
     results: [
