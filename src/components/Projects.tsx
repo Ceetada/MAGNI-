@@ -7,10 +7,11 @@ import Reveal from './Reveal'
 /** Base offset (px) where the first card pins, clearing the fixed navbar. */
 const STICK_BASE = 104
 /** Each subsequent card pins this much lower, leaving a sliver of the one beneath. */
-const STICK_STEP = 18
+const STICK_STEP = 16
 
 export default function Projects() {
   const cardsRef = useRef<(HTMLAnchorElement | null)[]>([])
+  const shadeRef = useRef<(HTMLDivElement | null)[]>([])
 
   useEffect(() => {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -25,10 +26,11 @@ export default function Projects() {
         const cards = cardsRef.current
         cards.forEach((card, i) => {
           const next = cards[i + 1]
+          const shade = shadeRef.current[i]
           if (!card) return
           if (!next) {
             card.style.transform = ''
-            card.style.opacity = ''
+            if (shade) shade.style.opacity = '0'
             return
           }
           const stickTop = STICK_BASE + i * STICK_STEP
@@ -36,8 +38,10 @@ export default function Projects() {
           // progress from "next card one card-height below" → "next card fully covering"
           const start = stickTop + card.offsetHeight
           const p = clamp((start - nextTop) / (start - stickTop))
-          card.style.transform = `scale(${1 - p * 0.05})`
-          card.style.opacity = `${1 - p * 0.28}`
+          // sink the covered card back and up so it tucks under the incoming one,
+          // and darken it as if the next card casts a shadow over it
+          card.style.transform = `translateY(${-p * 12}px) scale(${1 - p * 0.06})`
+          if (shade) shade.style.opacity = `${p * 0.45}`
         })
       })
     }
@@ -83,9 +87,18 @@ export default function Projects() {
                   cardsRef.current[i] = el
                 }}
                 to={`/work/${project.slug}`}
-                className="group grid min-h-[320px] grid-cols-1 overflow-hidden rounded-3xl bg-white shadow-[0_20px_60px_-24px_rgba(12,13,16,0.28)] ring-1 ring-ink-900/5 transition-shadow duration-300 will-change-transform hover:shadow-[0_30px_80px_-28px_rgba(12,13,16,0.32)] hover:ring-gold-500/30 md:grid-cols-[1.2fr_1fr]"
+                className="group relative grid min-h-[320px] grid-cols-1 overflow-hidden rounded-3xl bg-white shadow-[0_-8px_40px_-12px_rgba(12,13,16,0.22),0_20px_60px_-24px_rgba(12,13,16,0.28)] ring-1 ring-ink-900/5 transition-shadow duration-300 will-change-transform hover:shadow-[0_30px_80px_-28px_rgba(12,13,16,0.32)] hover:ring-gold-500/30 md:grid-cols-[1.2fr_1fr]"
                 style={{ transformOrigin: 'center top' }}
               >
+                {/* shadow cast by the next card as this one tucks underneath */}
+                <div
+                  ref={(el) => {
+                    shadeRef.current[i] = el
+                  }}
+                  className="pointer-events-none absolute inset-0 z-30 rounded-3xl bg-ink-950"
+                  style={{ opacity: 0 }}
+                />
+
                 {/* left: content */}
                 <div className="flex flex-col p-7 sm:p-9 lg:p-10">
                   <div className="flex items-start justify-between">
