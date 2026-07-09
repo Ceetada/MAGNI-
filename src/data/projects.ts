@@ -1,19 +1,25 @@
 import type { ComponentType } from 'react'
 import {
+  Bot,
+  CalendarCheck,
   ClipboardList,
+  Database,
+  GitBranch,
   ImagePlus,
   MailCheck,
   MessageSquareText,
+  Mic,
   PenLine,
+  PhoneCall,
+  ScanSearch,
   Search,
   Send,
   ShieldCheck,
   Workflow,
-  PhoneCall,
-  Database,
   type LucideIcon,
 } from 'lucide-react'
 import SocialContentDiagram from '../components/diagrams/SocialContentDiagram'
+import RealEstateDiagram from '../components/diagrams/RealEstateDiagram'
 
 export interface WorkflowStep {
   title: string
@@ -112,54 +118,74 @@ export const projects: Project[] = [
     diagram: SocialContentDiagram,
   },
   {
-    slug: 'ai-support-chatbot',
+    slug: 'real-estate-lead-automation',
     index: '02',
-    title: '24/7 AI Customer Support Chatbot',
-    tagline: 'Support that never sleeps, never repeats itself, never misses a ticket.',
-    category: 'Customer Support',
+    title: 'Real Estate Assistant & Lead Automation System',
+    tagline: 'A Telegram AI agent that turns property enquiries into booked viewings.',
+    category: 'Lead Automation',
     summary:
-      'A trained AI chatbot embedded on-site and in DMs that resolves common support questions instantly and escalates the rest with full context.',
+      'An AI assistant that handles property enquiries on Telegram in text or voice, qualifies every lead into Google Sheets, recommends listings with real photos, and books viewings on the calendar.',
     description:
-      'Trained on the client’s help docs, order data, and policies, this assistant answers the questions that used to eat up a support team’s day: order status, returns, and product questions. Anything complex gets handed to a human with the full conversation already summarized.',
+      'Built for real estate companies that lose leads to slow replies and manual back-and-forth. Prospects simply message the business on Telegram, by text or voice note, and the system takes it from there: it captures their details, understands what they are looking for, recommends properties, and walks them all the way to a booked inspection.',
     icon: MessageSquareText,
-    stack: ['OpenAI', 'React', 'Supabase', 'Make', 'Slack API'],
+    stack: ['n8n', 'Telegram Bot API', 'OpenAI', 'Google Sheets', 'Supabase Vector Store', 'Google Calendar', 'Gmail'],
     results: [
-      { label: 'Tickets auto-resolved', value: '68%' },
-      { label: 'Avg. reply time', value: '2 sec' },
-      { label: 'CSAT score', value: '4.8 / 5' },
+      { label: 'Enquiry types handled', value: 'Text + voice' },
+      { label: 'Tools the agent can use', value: '6' },
+      { label: 'Duplicate lead records', value: '0' },
     ],
     workflow: [
       {
-        title: 'Train',
+        title: 'Telegram Intake',
         description:
-          'The assistant is fed the brand’s docs, FAQs, and product catalog so answers stay accurate and on-brand.',
-        icon: Database,
-      },
-      {
-        title: 'Converse',
-        description:
-          'Customers get instant, natural answers on the website or in DMs, any time of day, in the brand’s tone.',
+          'A prospect messages the business on Telegram. The workflow immediately checks whether it received a text message or a voice note and routes it accordingly.',
         icon: MessageSquareText,
       },
       {
-        title: 'Resolve or Escalate',
+        title: 'Voice Transcription',
         description:
-          'Routine questions are closed on the spot; anything nuanced is flagged and handed to a teammate with a summary attached.',
-        icon: Workflow,
+          'Voice notes are downloaded and transcribed with OpenAI, so a spoken enquiry flows through the rest of the system exactly like a typed one.',
+        icon: Mic,
       },
       {
-        title: 'Notify',
+        title: 'Lead Extraction',
         description:
-          'Escalations land directly in Slack with the full thread, so the team never starts a reply from scratch.',
-        icon: PhoneCall,
+          'The system pulls out the details that matter: name, email, phone number, preferred location, and what kind of property they are after.',
+        icon: ScanSearch,
       },
       {
-        title: 'Learn',
+        title: 'Clean Lead Records',
         description:
-          'Unanswered questions are logged and reviewed weekly to keep expanding what the assistant can handle on its own.',
+          'Every lead is saved and updated in Google Sheets, keyed by Telegram chat ID. Returning prospects are recognized instantly, so there are no duplicate records to clean up later.',
         icon: Database,
       },
+      {
+        title: 'The Agent Takes Over',
+        description:
+          'An AI agent answers company questions from a knowledge base, searches live property listings, recommends suitable options, and sends real property photos right in the chat.',
+        icon: Bot,
+      },
+      {
+        title: 'Lead State Logic',
+        description:
+          'The agent knows whether a prospect is just browsing, still sharing details, ready to see listings, or trying to book. It asks the right question at the right time instead of repeating itself or jumping ahead.',
+        icon: GitBranch,
+      },
+      {
+        title: 'Viewing Booked',
+        description:
+          'The agent checks availability on Google Calendar and schedules the inspection directly in the conversation, no phone tag required.',
+        icon: CalendarCheck,
+      },
+      {
+        title: 'Two-Email Follow-Up',
+        description:
+          'Booking confirmed, two emails go out: a confirmation to reassure the prospect, and an internal notification giving the company clear action points for follow-up.',
+        icon: MailCheck,
+      },
     ],
+    why: 'The AI is only one part of the system. The real value comes from combining it with clear workflow logic, clean data handling, proper lead stages, and the right business tools. That combination is what lets a company respond faster, miss fewer leads, keep records cleaner, and move prospects from enquiry to inspection with far less manual work.',
+    diagram: RealEstateDiagram,
   },
   {
     slug: 'crm-workflow-automation',
