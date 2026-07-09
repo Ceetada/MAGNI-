@@ -1,7 +1,6 @@
 import { ArrowRight, Sparkles } from 'lucide-react'
 import HeroBackgroundScenic from './HeroBackgroundScenic'
-import WorkflowMockup from './WorkflowMockup'
-import ScaledMockup from './ScaledMockup'
+import HeroFlow from './HeroFlow'
 
 export default function Hero() {
   return (
@@ -50,10 +49,10 @@ export default function Hero() {
 
       <div className="h-10 shrink-0 sm:h-14 lg:h-20" />
 
-      <div className="animate-hero-rise relative z-0 mx-auto -mb-1 w-[92%] max-w-3xl shrink-0 [animation-delay:600ms] sm:w-[84%] lg:w-[72%]">
-        <ScaledMockup>
-          <WorkflowMockup />
-        </ScaledMockup>
+      {/* Live animated automation flow. Restore <WorkflowMockup /> (from
+          ./WorkflowMockup, wrapped in <ScaledMockup>) to revert to the dark panel. */}
+      <div className="animate-hero-rise relative z-0 mx-auto -mb-2 w-[94%] max-w-4xl shrink-0 [animation-delay:600ms] sm:w-[88%] lg:w-[80%]">
+        <HeroFlow />
       </div>
     </section>
   )
