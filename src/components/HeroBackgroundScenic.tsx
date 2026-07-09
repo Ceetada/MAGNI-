@@ -1,7 +1,12 @@
+import { useEffect, useState } from 'react'
+
 /** Prototype "golden-hour landscape" hero backdrop, drawn entirely in SVG so it
  *  stays on-brand (gold palette), needs no external image, and renders in the
- *  locked-down artifact preview. Swap back to <HeroBackground /> to revert. */
+ *  locked-down artifact preview. Flowing wave lines scroll across the sky on an
+ *  endless loop to keep the scene alive. */
 export default function HeroBackgroundScenic() {
+  const motionOK = useMotionOK()
+
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
       <svg
@@ -30,11 +35,30 @@ export default function HeroBackgroundScenic() {
 
         {/* sky + sun glow (low, sitting behind where the mockup rises) */}
         <rect width="1440" height="900" fill="url(#sky)" />
-        <circle cx="720" cy="660" r="300" fill="url(#sun)" />
+        <circle cx="720" cy="660" r="300" fill="url(#sun)">
+          {motionOK && (
+            <animate attributeName="r" values="300;318;300" dur="7s" repeatCount="indefinite" />
+          )}
+        </circle>
         <circle cx="720" cy="660" r="60" fill="#fff6e0" opacity="0.7" />
+
+        {/* flowing wave "currents" scrolling across the sky */}
+        <Wave y={232} amp={24} dur={16} dir="left" color="#e08a0e" opacity={0.16} width={2} animate={motionOK} />
+        <Wave y={298} amp={34} dur={23} dir="right" color="#f5a81c" opacity={0.13} width={2} animate={motionOK} />
+        <Wave y={372} amp={20} dur={13} dir="left" color="#c9791a" opacity={0.12} width={1.6} animate={motionOK} />
+        <Wave y={432} amp={16} dur={27} dir="right" color="#e08a0e" opacity={0.1} width={1.6} animate={motionOK} />
 
         {/* soft clouds, kept high and to the edges so they clear the headline */}
         <g fill="#ffffff" opacity="0.5">
+          {motionOK && (
+            <animateTransform
+              attributeName="transform"
+              type="translate"
+              values="0 0; 34 0; 0 0"
+              dur="42s"
+              repeatCount="indefinite"
+            />
+          )}
           <ellipse cx="230" cy="150" rx="150" ry="28" />
           <ellipse cx="330" cy="176" rx="105" ry="22" />
           <ellipse cx="1180" cy="130" rx="165" ry="30" />
@@ -89,6 +113,15 @@ export default function HeroBackgroundScenic() {
 
         {/* distant birds */}
         <g stroke="#6a5a34" strokeWidth="2.5" fill="none" opacity="0.5" strokeLinecap="round">
+          {motionOK && (
+            <animateTransform
+              attributeName="transform"
+              type="translate"
+              values="0 0; -26 -10; 0 0"
+              dur="30s"
+              repeatCount="indefinite"
+            />
+          )}
           <path d="M980 330 q 10 -9 20 0 q 10 -9 20 0" />
           <path d="M1030 355 q 8 -7 16 0 q 8 -7 16 0" />
           <path d="M1000 375 q 7 -6 14 0 q 7 -6 14 0" />
@@ -100,6 +133,52 @@ export default function HeroBackgroundScenic() {
       {/* soft light wash behind the headline so dark AND gold text stay legible */}
       <div className="absolute left-1/2 top-[8%] h-[560px] w-[1000px] -translate-x-1/2 rounded-[50%] bg-white/45 blur-[110px]" />
     </div>
+  )
+}
+
+/** A wide sine-ish stroke that scrolls horizontally forever via SMIL translate
+ *  (translate is in SVG user units, so the loop stays seamless at any scale). */
+function Wave({
+  y,
+  amp,
+  dur,
+  dir,
+  color,
+  opacity,
+  width,
+  animate,
+}: {
+  y: number
+  amp: number
+  dur: number
+  dir: 'left' | 'right'
+  color: string
+  opacity: number
+  width: number
+  animate: boolean
+}) {
+  // 12 half-waves of 240px = 2880px total (6 full periods). Translating 1440px
+  // (3 periods) lands on identical phase, so the scroll is seamless.
+  let d = `M0 ${y}`
+  for (let i = 0; i < 12; i++) {
+    d += ` q 120 ${i % 2 === 0 ? -amp : amp} 240 0`
+  }
+  const from = dir === 'left' ? '0 0' : '-1440 0'
+  const to = dir === 'left' ? '-1440 0' : '0 0'
+
+  return (
+    <path d={d} fill="none" stroke={color} strokeWidth={width} strokeOpacity={opacity} strokeLinecap="round">
+      {animate && (
+        <animateTransform
+          attributeName="transform"
+          type="translate"
+          from={from}
+          to={to}
+          dur={`${dur}s`}
+          repeatCount="indefinite"
+        />
+      )}
+    </path>
   )
 }
 
@@ -123,4 +202,16 @@ function PineGroup({ x, baseY, scale = 1 }: { x: number; baseY: number; scale?: 
           Z`}
     />
   )
+}
+
+function useMotionOK() {
+  const [ok, setOk] = useState(true)
+  useEffect(() => {
+    const m = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const update = () => setOk(!m.matches)
+    update()
+    m.addEventListener('change', update)
+    return () => m.removeEventListener('change', update)
+  }, [])
+  return ok
 }
