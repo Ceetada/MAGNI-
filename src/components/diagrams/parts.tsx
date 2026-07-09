@@ -14,6 +14,7 @@ export interface MainNode {
 export interface ModelSpec {
   glyph: Glyph
   label: string
+  sub?: string
 }
 
 export function NodeCard({ node }: { node: MainNode }) {
@@ -37,14 +38,17 @@ export function NodeCard({ node }: { node: MainNode }) {
   )
 }
 
-export function ModelNode({ glyph: GlyphComp, label }: ModelSpec) {
+export function ModelNode({ glyph: GlyphComp, label, sub }: ModelSpec) {
   return (
     <div className="flex w-[76px] flex-col items-center gap-1.5">
       <span className="mx-auto block h-4 w-px border-l border-dashed border-white/20" />
       <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/[0.05] ring-1 ring-white/10">
         <GlyphComp className="h-4 w-4" />
       </span>
-      <span className="text-center text-[7px] leading-snug text-white/50">{label}</span>
+      <span className="text-center text-[7px] leading-snug text-white/50">
+        {label}
+        {sub && <span className="block text-[6.5px] text-white/30">{sub}</span>}
+      </span>
     </div>
   )
 }
