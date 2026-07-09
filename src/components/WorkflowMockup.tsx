@@ -17,7 +17,7 @@ function Connector() {
 
 export default function WorkflowMockup() {
   return (
-    <div className="overflow-hidden rounded-t-2xl bg-ink-900 text-left shadow-[0_-20px_80px_rgba(0,0,0,0.5)] ring-1 ring-white/10">
+    <div className="overflow-hidden rounded-t-2xl bg-ink-900 text-left shadow-[0_-24px_90px_-10px_rgba(12,13,16,0.35)] ring-1 ring-ink-900/20">
       {/* title bar */}
       <div className="flex items-center gap-3 border-b border-white/5 bg-ink-800 px-4 py-2.5">
         <div className="flex items-center gap-1.5">
@@ -38,7 +38,7 @@ export default function WorkflowMockup() {
 
       {/* canvas */}
       <div className="relative bg-ink-950 px-5 py-8 sm:px-10 sm:py-12">
-        <div className="grid-fade absolute inset-0 opacity-60" />
+        <div className="grid-fade-dark absolute inset-0 opacity-60" />
         <div className="relative mb-6 flex items-center justify-between">
           <div>
             <p className="text-sm font-medium text-white">Lead Follow-Up Automation</p>

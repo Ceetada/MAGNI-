@@ -17,8 +17,8 @@ export default function Logo({ className = '', markOnly = false }: LogoProps) {
         <path d="M240 360 L508 540 L776 360 L508 630 Z" />
       </svg>
       {!markOnly && (
-        <span className="text-[15px] font-semibold tracking-tight text-white sm:text-base">
-          Magni <span className="font-normal text-white/60">Automations</span>
+        <span className="text-[15px] font-semibold tracking-tight text-ink-900 sm:text-base">
+          Magni <span className="font-normal text-ink-900/55">Automations</span>
         </span>
       )}
     </span>

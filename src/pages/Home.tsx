@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
-import ToolsMarquee from '../components/ToolsMarquee'
 import About from '../components/About'
 import Services from '../components/Services'
 import Projects from '../components/Projects'
@@ -23,10 +22,9 @@ export default function Home() {
   }, [location.hash])
 
   return (
-    <div className="bg-ink-950">
+    <div className="bg-[#fafafa]">
       <Navbar />
       <Hero />
-      <ToolsMarquee />
       <About />
       <Services />
       <Projects />
