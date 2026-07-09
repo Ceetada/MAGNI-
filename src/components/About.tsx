@@ -4,7 +4,6 @@ import Reveal from './Reveal'
 const STATS = [
   { value: '24/7', label: 'Systems running' },
   { value: '100%', label: 'Custom built' },
-  { value: '6+', label: 'Tools integrated' },
 ]
 
 const PRINCIPLES = [
@@ -48,7 +47,7 @@ export default function About() {
             </Reveal>
 
             <Reveal delay={120}>
-              <div className="mt-8 grid grid-cols-3 divide-x divide-ink-900/10 overflow-hidden rounded-2xl bg-[#f7f7f8] ring-1 ring-ink-900/5">
+              <div className="mt-8 grid grid-cols-2 divide-x divide-ink-900/10 overflow-hidden rounded-2xl bg-[#f7f7f8] ring-1 ring-ink-900/5">
                 {STATS.map((stat) => (
                   <div key={stat.label} className="px-3 py-5 text-center sm:px-4">
                     <p className="text-2xl font-medium text-ink-900 sm:text-3xl">{stat.value}</p>
