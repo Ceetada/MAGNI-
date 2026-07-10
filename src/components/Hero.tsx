@@ -22,8 +22,8 @@ export default function Hero() {
           <span className="block animate-fade-up">We Build AI Systems That</span>
           <ScrambleText
             text="Save Time, Capture Leads,"
-            startDelay={350}
-            duration={1200}
+            startDelay={400}
+            perChar={130}
             className="block animate-fade-up text-gold-700 [animation-delay:120ms]"
           />
           <span className="block animate-fade-up [animation-delay:240ms]">and Scale Businesses.</span>
