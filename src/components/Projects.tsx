@@ -40,8 +40,8 @@ export default function Projects() {
           const p = clamp((start - nextTop) / (start - stickTop))
           // sink the covered card back and up so it tucks under the incoming one,
           // and darken it as if the next card casts a shadow over it
-          card.style.transform = `translateY(${-p * 12}px) scale(${1 - p * 0.06})`
-          if (shade) shade.style.opacity = `${p * 0.45}`
+          card.style.transform = `translateY(${-p * 18}px) scale(${1 - p * 0.09})`
+          if (shade) shade.style.opacity = `${p * 0.5}`
         })
       })
     }
@@ -57,8 +57,12 @@ export default function Projects() {
   }, [])
 
   return (
-    <section id="work" className="relative overflow-hidden bg-[#f4f4f5] py-24 sm:py-32">
-      <div className="pointer-events-none absolute left-1/2 top-0 h-[400px] w-[900px] -translate-x-1/2 rounded-full bg-gold-300/10 blur-[140px]" />
+    <section id="work" className="relative bg-[#f4f4f5] py-24 sm:py-32">
+      {/* glow clipped in its own layer so the section keeps no overflow:hidden
+          (an overflow ancestor breaks position:sticky, notably in Safari) */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute left-1/2 top-0 h-[400px] w-[900px] -translate-x-1/2 rounded-full bg-gold-300/10 blur-[140px]" />
+      </div>
 
       <div className="relative mx-auto max-w-6xl px-5 sm:px-8 lg:px-10">
         <Reveal className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
