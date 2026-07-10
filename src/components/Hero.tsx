@@ -1,6 +1,7 @@
 import { ArrowRight, Sparkles } from 'lucide-react'
 import HeroBackgroundScenic from './HeroBackgroundScenic'
 import HeroFlow from './HeroFlow'
+import ScrambleText from './ScrambleText'
 
 export default function Hero() {
   return (
@@ -19,9 +20,12 @@ export default function Hero() {
 
         <h1 className="mt-5 max-w-4xl text-[38px] font-medium leading-[1.08] tracking-tight text-ink-900 min-[400px]:text-[44px] sm:text-6xl lg:text-7xl">
           <span className="block animate-fade-up">We Build AI Systems That</span>
-          <span className="block animate-fade-up text-gold-700 [animation-delay:120ms]">
-            Save Time, Capture Leads,
-          </span>
+          <ScrambleText
+            text="Save Time, Capture Leads,"
+            startDelay={350}
+            duration={1200}
+            className="block animate-fade-up text-gold-700 [animation-delay:120ms]"
+          />
           <span className="block animate-fade-up [animation-delay:240ms]">and Scale Businesses.</span>
         </h1>
 
