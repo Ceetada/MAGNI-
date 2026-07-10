@@ -1,14 +1,12 @@
 import { ArrowRight, Sparkles } from 'lucide-react'
 import HeroBackgroundScenic from './HeroBackgroundScenic'
 import HeroFlow from './HeroFlow'
-import HeroAmbience from './HeroAmbience'
 
 export default function Hero() {
   return (
     <section className="relative flex min-h-[100svh] flex-col overflow-hidden bg-[#fafafa]">
       {/* Prototype backdrop. Restore <HeroBackground /> (from ./HeroBackground) to revert. */}
       <HeroBackgroundScenic />
-      <HeroAmbience />
 
       {/* spacer for fixed navbar */}
       <div className="h-[64px] shrink-0 sm:h-[76px]" />
