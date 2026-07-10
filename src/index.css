@@ -97,6 +97,16 @@ body {
   }
 }
 
+/* Clouds drifting across the sky hero */
+@keyframes cloud-drift {
+  from {
+    transform: translateX(-360px);
+  }
+  to {
+    transform: translateX(calc(100vw + 360px));
+  }
+}
+
 /* Marching dashes along SVG workflow connectors */
 .animate-dash-flow {
   animation: dash-flow 1.4s linear infinite;
