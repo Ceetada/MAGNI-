@@ -36,9 +36,6 @@ export default function Navbar() {
     el?.scrollIntoView({ behavior: 'smooth' })
   }
 
-  // over the blue sky hero (home page, not yet scrolled) → use light nav text
-  const overHero = location.pathname === '/' && !scrolled
-
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 animate-fade-down transition-all duration-300 ${
@@ -47,7 +44,7 @@ export default function Navbar() {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8 sm:py-5 lg:px-10">
         <Link to="/" className="transition-opacity hover:opacity-80" aria-label="Magni Automations home">
-          <Logo light={overHero} />
+          <Logo />
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
@@ -55,9 +52,7 @@ export default function Navbar() {
             <button
               key={link.label}
               onClick={() => goToSection(link.hash)}
-              className={`group relative text-[13px] transition-colors ${
-                overHero ? 'text-white/80 hover:text-white' : 'text-ink-700/70 hover:text-ink-900'
-              }`}
+              className="group relative text-[13px] text-ink-700/70 transition-colors hover:text-ink-900"
             >
               {link.label}
               <span className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-gold-500 transition-transform duration-300 group-hover:scale-x-100" />
@@ -68,19 +63,13 @@ export default function Navbar() {
         <div className="flex items-center gap-2">
           <button
             onClick={() => goToSection('#contact')}
-            className={`hidden rounded-full px-5 py-2 text-[13px] font-medium transition-all hover:shadow-lg sm:inline-block ${
-              overHero
-                ? 'bg-white text-ink-900 hover:bg-white/90'
-                : 'bg-ink-900 text-white hover:bg-ink-800'
-            }`}
+            className="hidden rounded-full bg-ink-900 px-5 py-2 text-[13px] font-medium text-white transition-all hover:bg-ink-800 hover:shadow-lg sm:inline-block"
           >
             Book Free Consultation
           </button>
           <button
             onClick={() => setOpen((v) => !v)}
-            className={`flex h-9 w-9 items-center justify-center rounded-full transition-colors md:hidden ${
-              overHero ? 'text-white hover:bg-white/15' : 'text-ink-900 hover:bg-ink-900/5'
-            }`}
+            className="flex h-9 w-9 items-center justify-center rounded-full text-ink-900 transition-colors hover:bg-ink-900/5 md:hidden"
             aria-label="Toggle menu"
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
