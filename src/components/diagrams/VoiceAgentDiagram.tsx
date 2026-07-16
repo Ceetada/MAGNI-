@@ -20,7 +20,7 @@ const KbGlyph = ({ className = 'h-4 w-4' }: { className?: string }): ReactElemen
 
 const ROW: MainNode[] = [
   { label: 'Incoming Call', sub: 'inbound', glyph: CallGlyph, trigger: true },
-  { label: 'Esther · Voice Agent', sub: 'Voice · Brain · Tools', icon: Headset },
+  { label: 'AI Voice Agent', sub: 'Voice · Brain · Tools', icon: Headset },
   { label: 'Speak to Caller', sub: 'live reply', glyph: OutGlyph },
 ]
 
@@ -32,13 +32,13 @@ const TOOLS = [
   { glyph: CalendarGlyph, label: 'book_appointment', sub: 'create: event' },
 ]
 
-/** Architecture diagram for the voice receptionist: a call flows into Esther,
- *  the ElevenLabs + Gemini voice agent, which uses a knowledge base and two
+/** Architecture diagram for the voice receptionist: a call flows into the
+ *  ElevenLabs + Gemini voice agent, which uses a knowledge base and two
  *  Google-Calendar tools to check availability and book the appointment. */
 export default function VoiceAgentDiagram() {
   return (
     <ScaledMockup designWidth={860}>
-      <CanvasFrame title="Voice Receptionist · Esther">
+      <CanvasFrame title="AI Voice Receptionist">
         <div className="relative flex justify-center pb-[150px]">
           {ROW.map((node, i) => (
             <div key={node.label} className="contents">
@@ -47,7 +47,7 @@ export default function VoiceAgentDiagram() {
             </div>
           ))}
 
-          {/* Esther's voice, brain and tools fan out below the agent */}
+          {/* the agent's voice, brain and tools fan out below it */}
           <div className="absolute left-1/2 top-[92px] flex -translate-x-1/2 gap-2">
             {TOOLS.map((tool) => (
               <ModelNode key={tool.label} {...tool} />

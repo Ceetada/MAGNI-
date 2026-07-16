@@ -266,9 +266,9 @@ export const projects: Project[] = [
     tagline: 'A natural-sounding AI receptionist that answers every call, checks the calendar live, and books the appointment before you hang up.',
     category: 'Voice Automation',
     summary:
-      'A voice agent named Esther that answers inbound calls, handles questions from a knowledge base, checks live appointment availability on Google Calendar, and books the appointment during the call.',
+      'A voice agent that answers inbound calls, handles questions from a knowledge base, checks live appointment availability on Google Calendar, and books the appointment during the call.',
     description:
-      'Missed calls mean missed patients. This build pairs an ElevenLabs voice agent, Esther, running on Gemini 2.5 Flash, with two n8n workflows wired into Google Calendar. Esther answers naturally, works out what the caller needs, checks real availability, confirms the details out loud, and books the appointment before the call ends, with everything landing on the calendar automatically.',
+      'Missed calls mean missed patients. This build pairs an ElevenLabs voice agent, running on Gemini 2.5 Flash, with two n8n workflows wired into Google Calendar. The agent answers naturally, works out what the caller needs, checks real availability, confirms the details out loud, and books the appointment before the call ends, with everything landing on the calendar automatically.',
     icon: PhoneCall,
     stack: ['ElevenLabs', 'Gemini 2.5 Flash', 'n8n', 'Google Calendar', 'Webhooks'],
     results: [
@@ -280,31 +280,31 @@ export const projects: Project[] = [
       {
         title: 'Call Answered',
         description:
-          'Esther picks up right away with a warm, natural greeting: “Hi, thanks for calling. This is Esther, how can I help you today?” She is fully interruptible, so callers can speak over her like a real conversation.',
+          'The agent picks up right away with a warm, natural greeting and asks how it can help. It is fully interruptible, so callers can speak over it like a real conversation.',
         icon: PhoneCall,
       },
       {
         title: 'Understand the Caller',
         description:
-          'Running on Gemini 2.5 Flash with an ElevenLabs voice, Esther listens with natural conversational cues and works out whether the caller has a question or wants to book an appointment.',
+          'Running on Gemini 2.5 Flash with an ElevenLabs voice, the agent listens with natural conversational cues and works out whether the caller has a question or wants to book an appointment.',
         icon: Headset,
       },
       {
         title: 'Answer from the Knowledge Base',
         description:
-          'For general questions, Esther answers directly from the business’s knowledge base instead of putting the caller on hold or taking a message.',
+          'For general questions, the agent answers directly from the business’s knowledge base instead of putting the caller on hold or taking a message.',
         icon: BookOpen,
       },
       {
         title: 'Check Availability, Live',
         description:
-          'To book, Esther calls an n8n webhook that reads Google Calendar in real time, validates working hours, and returns the requested slot or the nearest open alternatives. She never invents availability.',
+          'To book, the agent calls an n8n webhook that reads Google Calendar in real time, validates working hours, and returns the requested slot or the nearest open alternatives. It never invents availability.',
         icon: CalendarCheck,
       },
       {
         title: 'Confirm the Details',
         description:
-          'Esther reads the name, department, concern, and the confirmed time back to the caller, so nothing is committed until the caller agrees.',
+          'The agent reads the name, department, concern, and the confirmed time back to the caller, so nothing is committed until the caller agrees.',
         icon: ShieldCheck,
       },
       {
@@ -316,11 +316,11 @@ export const projects: Project[] = [
       {
         title: 'Wrap Up',
         description:
-          'Esther confirms the booking out loud and ends the call. The appointment is already on the calendar, ready for the team, with zero manual entry.',
+          'The agent confirms the booking out loud and ends the call. The appointment is already on the calendar, ready for the team, with zero manual entry.',
         icon: PhoneOutgoing,
       },
     ],
-    why: 'The magic is not just a good voice, it is the voice agent wired into real systems. Esther never invents availability or double-books: every slot is validated against Google Calendar live, confirmed with the caller, and only then committed. Splitting availability-checking and booking into separate, single-purpose steps keeps the whole thing reliable, so a call that used to be missed becomes a booked appointment without anyone on staff lifting a finger.',
+    why: 'The magic is not just a good voice, it is the voice agent wired into real systems. The agent never invents availability or double-books: every slot is validated against Google Calendar live, confirmed with the caller, and only then committed. Splitting availability-checking and booking into separate, single-purpose steps keeps the whole thing reliable, so a call that used to be missed becomes a booked appointment without anyone on staff lifting a finger.',
     diagram: VoiceAgentDiagram,
   },
 ]
