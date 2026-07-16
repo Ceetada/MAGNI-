@@ -35,18 +35,18 @@ export default function CTA() {
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
                 <a
-                  href="mailto:hello@magniautomations.ai"
+                  href="mailto:support@magniautomation.com"
                   className="group inline-flex items-center gap-2 rounded-full bg-gold-500 px-6 py-3 text-sm font-medium text-ink-950 transition-all duration-300 hover:-translate-y-0.5 hover:bg-gold-400 hover:shadow-[0_12px_32px_rgba(245,168,28,0.45)] active:translate-y-0"
                 >
                   Book Free Consultation
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </a>
                 <a
-                  href="mailto:hello@magniautomations.ai"
+                  href="mailto:support@magniautomation.com"
                   className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-white/80 ring-1 ring-white/20 transition-colors hover:bg-white/5 hover:text-white"
                 >
                   <Mail className="h-4 w-4" />
-                  hello@magniautomations.ai
+                  support@magniautomation.com
                 </a>
               </div>
             </div>

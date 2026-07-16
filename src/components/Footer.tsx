@@ -11,8 +11,8 @@ export default function Footer() {
         <p className="text-[13px] text-ink-700/45">
           &copy; {new Date().getFullYear()} Magni Automations. All rights reserved.
         </p>
-        <a href="mailto:hello@magniautomations.ai" className="text-[13px] text-ink-700/60 transition-colors hover:text-ink-900">
-          hello@magniautomations.ai
+        <a href="mailto:support@magniautomation.com" className="text-[13px] text-ink-700/60 transition-colors hover:text-ink-900">
+          support@magniautomation.com
         </a>
       </div>
     </footer>
