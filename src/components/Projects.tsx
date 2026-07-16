@@ -69,11 +69,11 @@ export default function Projects() {
           <div>
             <span className="text-[12px] font-medium uppercase tracking-widest text-gold-700">Selected Work</span>
             <h2 className="mt-3 text-3xl font-medium tracking-tight text-ink-900 sm:text-4xl">
-              Systems we&rsquo;ve built
+              Systems we have built
             </h2>
           </div>
           <p className="max-w-sm text-sm text-ink-700/60 sm:text-right">
-            Four AI automation builds, each solving a real business problem. Scroll through, then click any
+            Some AI automation builds, each solving a real business problem. Scroll through, then click any
             project to see the full workflow behind it.
           </p>
         </Reveal>

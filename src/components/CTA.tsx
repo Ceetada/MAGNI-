@@ -24,13 +24,13 @@ export default function CTA() {
 
             <div className="relative">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-gold-500/10 px-3.5 py-1.5 text-[12px] text-gold-400 ring-1 ring-gold-500/25">
-                Let&rsquo;s build something
+                Let us build something
               </span>
               <h2 className="mt-5 text-3xl font-medium tracking-tight text-white sm:text-4xl lg:text-5xl">
                 Ready to put your business on <span className="text-gradient-gold">autopilot?</span>
               </h2>
               <p className="mx-auto mt-4 max-w-lg text-sm text-white/55 sm:text-base">
-                Book a free consultation and we&rsquo;ll map out exactly where AI automation can save you time
+                Book a free consultation and we will map out exactly where AI automation can save you time
                 and win you more revenue.
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
