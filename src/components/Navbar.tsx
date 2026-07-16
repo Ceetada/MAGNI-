@@ -37,65 +37,60 @@ export default function Navbar() {
   }
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 animate-fade-down transition-all duration-300 ${
-        scrolled ? 'bg-white/80 shadow-[0_1px_0_rgba(12,13,16,0.06)] backdrop-blur-lg' : 'bg-transparent'
-      }`}
-    >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8 sm:py-5 lg:px-10">
-        <Link to="/" className="transition-opacity hover:opacity-80" aria-label="Magni Automations home">
-          <Logo />
-        </Link>
+    <header className="fixed inset-x-0 top-0 z-50 flex animate-fade-down justify-center px-4 pt-4 sm:pt-5">
+      <div className="relative w-full max-w-3xl">
+        <div
+          className={`flex items-center justify-between gap-2 rounded-full bg-ink-900/95 py-2 pl-3 pr-2 shadow-[0_10px_40px_-12px_rgba(12,13,16,0.5)] ring-1 ring-white/10 backdrop-blur-md transition-all duration-300 ${
+            scrolled ? 'shadow-[0_12px_44px_-10px_rgba(12,13,16,0.6)]' : ''
+          }`}
+        >
+          <Link to="/" className="pl-1 transition-opacity hover:opacity-80" aria-label="Magni Automations home">
+            <Logo light />
+          </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
-          {NAV_LINKS.map((link) => (
+          <nav className="hidden items-center gap-6 md:flex">
+            {NAV_LINKS.map((link) => (
+              <button
+                key={link.label}
+                onClick={() => goToSection(link.hash)}
+                className="text-[13px] text-white/65 transition-colors hover:text-white"
+              >
+                {link.label}
+              </button>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-1.5">
             <button
-              key={link.label}
-              onClick={() => goToSection(link.hash)}
-              className="group relative text-[13px] text-ink-700/70 transition-colors hover:text-ink-900"
+              onClick={() => goToSection('#contact')}
+              className="rounded-full bg-white px-4 py-2 text-[13px] font-medium text-ink-900 transition-colors hover:bg-white/90"
             >
-              {link.label}
-              <span className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-gold-500 transition-transform duration-300 group-hover:scale-x-100" />
+              Book a call
             </button>
-          ))}
-        </nav>
-
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => goToSection('#contact')}
-            className="hidden rounded-full bg-ink-900 px-5 py-2 text-[13px] font-medium text-white transition-all hover:bg-ink-800 hover:shadow-lg sm:inline-block"
-          >
-            Book Free Consultation
-          </button>
-          <button
-            onClick={() => setOpen((v) => !v)}
-            className="flex h-9 w-9 items-center justify-center rounded-full text-ink-900 transition-colors hover:bg-ink-900/5 md:hidden"
-            aria-label="Toggle menu"
-          >
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
+            <button
+              onClick={() => setOpen((v) => !v)}
+              className="flex h-9 w-9 items-center justify-center rounded-full text-white/80 transition-colors hover:bg-white/10 md:hidden"
+              aria-label="Toggle menu"
+            >
+              {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
         </div>
+
+        {open && (
+          <div className="absolute inset-x-0 top-full mt-2 animate-fade-up rounded-3xl bg-ink-900/95 p-3 shadow-[0_20px_60px_rgba(12,13,16,0.5)] ring-1 ring-white/10 backdrop-blur-md md:hidden">
+            {NAV_LINKS.map((link) => (
+              <button
+                key={link.label}
+                onClick={() => goToSection(link.hash)}
+                className="block w-full border-b border-white/10 py-3 text-left text-[15px] text-white/80 last:border-b-0 hover:text-white"
+              >
+                {link.label}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
-
-      {open && (
-        <div className="absolute left-4 right-4 top-full animate-fade-up rounded-2xl bg-white/95 px-5 py-3 shadow-[0_20px_60px_rgba(12,13,16,0.12)] ring-1 ring-ink-900/10 backdrop-blur-xl md:hidden">
-          {NAV_LINKS.map((link) => (
-            <button
-              key={link.label}
-              onClick={() => goToSection(link.hash)}
-              className="block w-full border-b border-ink-900/10 py-3 text-left text-[15px] text-ink-700 last:border-b-0 hover:text-ink-900"
-            >
-              {link.label}
-            </button>
-          ))}
-          <button
-            onClick={() => goToSection('#contact')}
-            className="mb-1 mt-3 w-full rounded-full bg-ink-900 px-5 py-2.5 text-[14px] font-medium text-white"
-          >
-            Book Free Consultation
-          </button>
-        </div>
-      )}
     </header>
   )
 }
