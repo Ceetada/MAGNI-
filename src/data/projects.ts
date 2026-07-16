@@ -1,16 +1,20 @@
 import type { ComponentType } from 'react'
 import {
+  BookOpen,
   Bot,
   CalendarCheck,
+  CalendarPlus,
   ClipboardList,
   Database,
   GitBranch,
+  Headset,
   ImagePlus,
   MailCheck,
   MessageSquareText,
   Mic,
   PenLine,
   PhoneCall,
+  PhoneOutgoing,
   ReceiptText,
   ScanSearch,
   Search,
@@ -23,6 +27,7 @@ import {
 import SocialContentDiagram from '../components/diagrams/SocialContentDiagram'
 import RealEstateDiagram from '../components/diagrams/RealEstateDiagram'
 import ExpenseTrackerDiagram from '../components/diagrams/ExpenseTrackerDiagram'
+import VoiceAgentDiagram from '../components/diagrams/VoiceAgentDiagram'
 
 export interface WorkflowStep {
   title: string
@@ -258,51 +263,65 @@ export const projects: Project[] = [
     slug: 'ai-voice-receptionist',
     index: '04',
     title: 'AI Voice Receptionist & Appointment Setter',
-    tagline: 'Every call answered. Every appointment booked. Zero missed calls.',
+    tagline: 'A natural-sounding AI receptionist that answers every call, checks the calendar live, and books the appointment before you hang up.',
     category: 'Voice Automation',
     summary:
-      'An AI voice agent that answers inbound calls, handles common questions, and books appointments directly into the calendar in real time.',
+      'A voice agent named Esther that answers inbound calls, handles questions from a knowledge base, checks live appointment availability on Google Calendar, and books the appointment during the call.',
     description:
-      'Missed calls were costing this client real revenue every week. We deployed an AI voice receptionist that answers every call on the first ring, sounds natural on the phone, and books qualified appointments straight into the calendar, then sends the team a full transcript and recording automatically.',
+      'Missed calls mean missed patients. This build pairs an ElevenLabs voice agent, Esther, running on Gemini 2.5 Flash, with two n8n workflows wired into Google Calendar. Esther answers naturally, works out what the caller needs, checks real availability, confirms the details out loud, and books the appointment before the call ends, with everything landing on the calendar automatically.',
     icon: PhoneCall,
-    stack: ['Vapi', 'OpenAI', 'Cal.com', 'Twilio', 'Make'],
+    stack: ['ElevenLabs', 'Gemini 2.5 Flash', 'n8n', 'Google Calendar', 'Webhooks'],
     results: [
-      { label: 'Missed calls', value: '0%' },
-      { label: 'Appointments booked', value: '+35%' },
-      { label: 'Avg. call handled in', value: '90 sec' },
+      { label: 'Calls answered', value: '24/7' },
+      { label: 'Availability', value: 'Live check' },
+      { label: 'Booked in-call', value: 'Yes' },
     ],
     workflow: [
       {
-        title: 'Answer',
+        title: 'Call Answered',
         description:
-          'Every inbound call is picked up instantly by a natural-sounding AI voice agent trained on the business’s services.',
+          'Esther picks up right away with a warm, natural greeting: “Hi, thanks for calling. This is Esther, how can I help you today?” She is fully interruptible, so callers can speak over her like a real conversation.',
         icon: PhoneCall,
       },
       {
-        title: 'Understand',
+        title: 'Understand the Caller',
         description:
-          'The agent asks the right questions to identify what the caller needs and checks real-time calendar availability.',
-        icon: MessageSquareText,
+          'Running on Gemini 2.5 Flash with an ElevenLabs voice, Esther listens with natural conversational cues and works out whether the caller has a question or wants to book an appointment.',
+        icon: Headset,
       },
       {
-        title: 'Book',
+        title: 'Answer from the Knowledge Base',
         description:
-          'A confirmed appointment is scheduled directly on the calendar during the call, no back-and-forth required.',
-        icon: Workflow,
+          'For general questions, Esther answers directly from the business’s knowledge base instead of putting the caller on hold or taking a message.',
+        icon: BookOpen,
       },
       {
-        title: 'Confirm',
+        title: 'Check Availability, Live',
         description:
-          'The caller receives an instant SMS confirmation, with a reminder sequence scheduled ahead of the appointment.',
-        icon: Database,
+          'To book, Esther calls an n8n webhook that reads Google Calendar in real time, validates working hours, and returns the requested slot or the nearest open alternatives. She never invents availability.',
+        icon: CalendarCheck,
       },
       {
-        title: 'Log',
+        title: 'Confirm the Details',
         description:
-          'A transcript and recording are saved and synced to the CRM so the team always has full context before the visit.',
-        icon: Database,
+          'Esther reads the name, department, concern, and the confirmed time back to the caller, so nothing is committed until the caller agrees.',
+        icon: ShieldCheck,
+      },
+      {
+        title: 'Book the Appointment',
+        description:
+          'A second n8n workflow creates the event on Google Calendar with the patient’s details, booked exactly at the confirmed time, never rounded or double-booked.',
+        icon: CalendarPlus,
+      },
+      {
+        title: 'Wrap Up',
+        description:
+          'Esther confirms the booking out loud and ends the call. The appointment is already on the calendar, ready for the team, with zero manual entry.',
+        icon: PhoneOutgoing,
       },
     ],
+    why: 'The magic is not just a good voice, it is the voice agent wired into real systems. Esther never invents availability or double-books: every slot is validated against Google Calendar live, confirmed with the caller, and only then committed. Splitting availability-checking and booking into separate, single-purpose steps keeps the whole thing reliable, so a call that used to be missed becomes a booked appointment without anyone on staff lifting a finger.',
+    diagram: VoiceAgentDiagram,
   },
 ]
 
