@@ -9,7 +9,7 @@ import Reveal from './Reveal'
 const FAQS = [
   {
     q: 'What is Magni Automations?',
-    a: 'Magni Automations is an AI automation agency that designs and builds custom AI systems for businesses. We build AI agents, n8n workflows, and voice agents that capture leads, support customers, handle repetitive work, and help businesses scale without adding headcount.',
+    a: 'Magni Automations is an AI automation agency that designs and builds custom AI systems for businesses. We build AI agents, automation workflows, and voice agents that capture leads, support customers, handle repetitive work, and help businesses scale without adding headcount.',
   },
   {
     q: 'What does an AI automation agency do?',
