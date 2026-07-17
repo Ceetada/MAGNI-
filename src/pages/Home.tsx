@@ -5,11 +5,20 @@ import Hero from '../components/Hero'
 import About from '../components/About'
 import Services from '../components/Services'
 import Projects from '../components/Projects'
+import FAQ from '../components/FAQ'
 import CTA from '../components/CTA'
 import Footer from '../components/Footer'
+import useSeo from '../hooks/useSeo'
 
 export default function Home() {
   const location = useLocation()
+
+  useSeo({
+    title: 'Magni Automations — AI Automation Agency for Lead Capture & Growth',
+    description:
+      'Magni Automations is an AI automation agency that designs and builds custom AI systems, n8n workflows, and voice agents to capture leads, support customers, and scale businesses on autopilot.',
+    path: '/',
+  })
 
   useEffect(() => {
     if (location.hash) {
@@ -28,6 +37,7 @@ export default function Home() {
       <About />
       <Projects />
       <Services />
+      <FAQ />
       <CTA />
       <Footer />
     </div>

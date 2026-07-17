@@ -5,10 +5,17 @@ import Reveal from '../components/Reveal'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import CTA from '../components/CTA'
+import useSeo from '../hooks/useSeo'
 
 export default function ProjectDetail() {
   const { slug } = useParams<{ slug: string }>()
   const project = getProjectBySlug(slug ?? '')
+
+  useSeo({
+    title: project ? `${project.title} — Magni Automations` : 'Magni Automations',
+    description: project?.summary ?? 'AI automation case study by Magni Automations.',
+    path: project ? `/work/${project.slug}` : '/',
+  })
 
   if (!project) return <Navigate to="/" replace />
 
