@@ -21,7 +21,7 @@ const FAQS = [
   },
   {
     q: 'Which tools and platforms do you build with?',
-    a: 'We build with n8n for workflow automation and connect leading AI models such as OpenAI, Google Gemini, and Claude, plus voice platforms like ElevenLabs. Systems integrate with the tools businesses already rely on, including Google Sheets, Google Calendar, Gmail, Telegram, LinkedIn, CRMs, and vector databases.',
+    a: 'We are platform-agnostic and use whatever fits the job best, including automation platforms like n8n, Make.com, and Zapier, as well as custom code when a build calls for it. We connect leading AI models such as OpenAI, Google Gemini, and Claude, plus voice platforms like ElevenLabs. Systems integrate with the tools businesses already rely on, including Google Sheets, Google Calendar, Gmail, Telegram, LinkedIn, CRMs, and vector databases.',
   },
   {
     q: 'How much does AI automation cost?',
