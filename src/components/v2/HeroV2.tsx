@@ -63,7 +63,7 @@ export default function HeroV2() {
   )
 
   return (
-    <section className="relative overflow-hidden bg-white">
+    <section className="relative bg-white">
       <Ruler side="left" />
       <Ruler side="right" />
 
@@ -74,7 +74,7 @@ export default function HeroV2() {
           AI Voice Receptionists now available
         </span>
 
-        <h1 className="mt-6 animate-fade-up text-[34px] font-medium leading-[1.08] tracking-tight text-ink-900 [animation-delay:100ms] min-[400px]:text-[38px] min-[460px]:text-[44px] sm:text-6xl lg:text-[64px]">
+        <h1 className="mt-6 animate-fade-up text-[clamp(34px,8.8vw,46px)] font-medium leading-[1.08] tracking-tight text-ink-900 [animation-delay:100ms] sm:text-6xl lg:text-[64px]">
           Your business shouldn&rsquo;t run on copy and paste
         </h1>
 
@@ -101,8 +101,9 @@ export default function HeroV2() {
 
       {/* dark stage — tabs switch the showcase in place */}
       <div id="work" className="relative scroll-mt-20 sm:scroll-mt-24">
-        {/* tabs on mobile: a native scrollable row in flow, above the stage */}
-        <div className="relative mx-auto max-w-full px-4 pb-4 sm:hidden">
+        {/* tabs on mobile: a scrollable row that sticks just under the navbar
+            while the visitor browses the stage */}
+        <div className="sticky top-16 z-40 bg-white px-4 pb-3 pt-1 sm:hidden">
           <div className="pointer-events-none absolute inset-y-0 left-4 z-10 w-5 rounded-l-full bg-gradient-to-r from-white to-transparent" />
           <div className="pointer-events-none absolute inset-y-0 right-4 z-10 w-5 rounded-r-full bg-gradient-to-l from-white to-transparent" />
           {tabBar}
@@ -110,7 +111,7 @@ export default function HeroV2() {
 
         <div className="relative">
           <div
-            className="relative mx-2 rounded-t-3xl bg-ink-950 px-3 pb-8 pt-6 sm:mx-4 sm:rounded-t-[36px] sm:px-8 sm:pb-12 sm:pt-28 lg:px-12"
+            className="relative mx-2 overflow-hidden rounded-t-3xl bg-ink-950 px-3 pb-8 pt-6 sm:mx-4 sm:rounded-t-[36px] sm:px-8 sm:pb-12 sm:pt-28 lg:px-12"
             style={{
               backgroundImage:
                 'radial-gradient(rgba(255,255,255,0.09) 1px, transparent 1.5px), radial-gradient(rgba(245,168,28,0.14) 1px, transparent 1.5px)',

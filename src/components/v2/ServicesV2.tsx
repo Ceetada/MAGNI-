@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ArrowUpRight, Check, Sparkles } from 'lucide-react'
 import Reveal from '../Reveal'
 import { DEPARTMENTS, SERVICES } from '../Services'
@@ -10,14 +10,32 @@ const STICK_STEP = 14
 
 /** v2 services: a black section where each service is a wide white card that
  *  pins and lets the next one lap over it — same deck mechanic as the
- *  original work section, retuned for the dark background. */
+ *  original work section, retuned for the dark background. On phones the
+ *  cards are too tall to stack, so the deck degrades to a plain list. */
 export default function ServicesV2() {
   const cardsRef = useRef<(HTMLDivElement | null)[]>([])
   const shadeRef = useRef<(HTMLDivElement | null)[]>([])
+  const [deck, setDeck] = useState(true)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 640px)')
+    const update = () => setDeck(mq.matches)
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
+  }, [])
 
   useEffect(() => {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduce) return
+    const cards = cardsRef.current
+    if (reduce || !deck) {
+      cards.forEach((card, i) => {
+        if (card) card.style.transform = ''
+        const shade = shadeRef.current[i]
+        if (shade) shade.style.opacity = '0'
+      })
+      return
+    }
 
     let frame = 0
     const clamp = (n: number) => Math.min(1, Math.max(0, n))
@@ -25,7 +43,6 @@ export default function ServicesV2() {
     const onScroll = () => {
       cancelAnimationFrame(frame)
       frame = requestAnimationFrame(() => {
-        const cards = cardsRef.current
         cards.forEach((card, i) => {
           const next = cards[i + 1]
           const shade = shadeRef.current[i]
@@ -54,10 +71,10 @@ export default function ServicesV2() {
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onScroll)
     }
-  }, [])
+  }, [deck])
 
   return (
-    <section id="services" className="relative bg-ink-950 py-24 sm:py-32">
+    <section id="services" className="relative bg-ink-950 py-16 sm:py-32">
       {/* glow + speckles clipped in their own layer so the section itself keeps
           no overflow:hidden (an overflow ancestor breaks position:sticky) */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -87,19 +104,19 @@ export default function ServicesV2() {
           </p>
         </Reveal>
 
-        {/* sticky deck of service cards */}
-        <div className="mt-14 sm:mt-16">
+        {/* deck of service cards: sticky-stacked on sm+, a plain list on phones */}
+        <div className="mt-10 sm:mt-16">
           {SERVICES.map((service, i) => (
             <div
               key={service.title}
-              className="sticky pb-5"
-              style={{ top: STICK_BASE + i * STICK_STEP, zIndex: i + 1 }}
+              className={deck ? 'sticky pb-5' : 'pb-4'}
+              style={deck ? { top: STICK_BASE + i * STICK_STEP, zIndex: i + 1 } : undefined}
             >
               <div
                 ref={(el) => {
                   cardsRef.current[i] = el
                 }}
-                className="group relative grid min-h-[260px] grid-cols-1 overflow-hidden rounded-3xl bg-white shadow-[0_-10px_50px_-16px_rgba(0,0,0,0.65),0_30px_70px_-30px_rgba(0,0,0,0.8)] ring-1 ring-white/10 will-change-transform md:grid-cols-[1.15fr_1fr]"
+                className="group relative grid grid-cols-1 overflow-hidden rounded-3xl bg-white shadow-[0_-10px_50px_-16px_rgba(0,0,0,0.65),0_30px_70px_-30px_rgba(0,0,0,0.8)] ring-1 ring-white/10 will-change-transform sm:min-h-[260px] md:grid-cols-[1.15fr_1fr]"
                 style={{ transformOrigin: 'center top' }}
               >
                 {/* shadow cast by the next card as this one tucks underneath */}
@@ -112,7 +129,7 @@ export default function ServicesV2() {
                 />
 
                 {/* left: the service */}
-                <div className="relative flex flex-col p-7 sm:p-9 lg:p-10">
+                <div className="relative flex flex-col p-5 sm:p-9 lg:p-10">
                   <div
                     className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                     style={{ background: service.gradient }}
@@ -123,7 +140,7 @@ export default function ServicesV2() {
                     </span>
                     <span className="font-mono text-xs text-ink-700/30">0{i + 1}</span>
                   </div>
-                  <h3 className="relative mt-6 text-xl font-medium tracking-tight text-ink-900 sm:text-2xl">
+                  <h3 className="relative mt-4 text-[19px] font-medium tracking-tight text-ink-900 sm:mt-6 sm:text-2xl">
                     {service.title}
                   </h3>
                   <p className="relative mt-3 max-w-md text-[14px] leading-relaxed text-ink-700/60 sm:text-[15px]">
@@ -132,7 +149,7 @@ export default function ServicesV2() {
                 </div>
 
                 {/* right: what you get */}
-                <div className="flex flex-col justify-center border-t border-ink-900/[0.06] bg-[#fafafa] p-7 sm:p-9 md:border-l md:border-t-0 lg:p-10">
+                <div className="flex flex-col justify-center border-t border-ink-900/[0.06] bg-[#fafafa] p-5 sm:p-9 md:border-l md:border-t-0 lg:p-10">
                   <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-ink-700/40">
                     What you get
                   </p>

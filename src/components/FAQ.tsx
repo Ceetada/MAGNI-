@@ -37,7 +37,7 @@ export default function FAQ() {
   const [open, setOpen] = useState<number | null>(0)
 
   return (
-    <section id="faq" className="relative bg-white px-5 py-24 sm:px-8 sm:py-32 lg:px-10">
+    <section id="faq" className="relative bg-white px-5 py-16 sm:px-8 sm:py-32 lg:px-10">
       <div className="mx-auto max-w-3xl">
         <Reveal className="text-center">
           <span className="text-[12px] font-medium uppercase tracking-widest text-gold-700">FAQ</span>

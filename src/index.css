@@ -6,6 +6,19 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* headlines break into balanced lines instead of leaving orphans */
+h1,
+h2 {
+  text-wrap: balance;
+}
+
+/* no gray flash on tap (iOS/Android) */
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {

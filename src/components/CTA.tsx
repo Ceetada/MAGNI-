@@ -3,7 +3,7 @@ import Reveal from './Reveal'
 
 export default function CTA() {
   return (
-    <section id="contact" className="relative bg-white px-5 py-24 sm:px-8 sm:py-32 lg:px-10">
+    <section id="contact" className="relative bg-white px-5 py-16 sm:px-8 sm:py-32 lg:px-10">
       <Reveal className="mx-auto max-w-3xl [perspective:1400px]">
         <div className="group/deck relative origin-bottom">
           {/* deck layers tucked behind, fanning out on hover */}
