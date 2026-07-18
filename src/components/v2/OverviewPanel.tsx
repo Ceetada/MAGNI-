@@ -17,14 +17,14 @@ export default function OverviewPanel({
   onSelect: (tabIndex: number) => void
 }) {
   return (
-    <div className="rounded-3xl bg-white/[0.03] p-7 ring-1 ring-white/10 sm:p-10 lg:p-14">
-      <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+    <div className="rounded-3xl bg-white/[0.03] p-5 ring-1 ring-white/10 sm:p-10 lg:p-14">
+      <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
         {/* left: the writeup */}
         <div>
           <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-gold-500/90">
             Our Work
           </span>
-          <h2 className="mt-4 text-2xl font-medium leading-tight tracking-tight text-white sm:text-[32px]">
+          <h2 className="mt-3 text-[22px] font-medium leading-tight tracking-tight text-white sm:mt-4 sm:text-[32px]">
             Systems we
             <br className="hidden lg:block" /> have built
           </h2>

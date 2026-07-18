@@ -231,7 +231,7 @@ export default function SystemCard({ slug, displayIndex }: { slug: string; displ
 
   return (
     <div key={slug} className="animate-fade-up">
-      <div className="rounded-3xl bg-white p-6 shadow-[0_50px_120px_-30px_rgba(0,0,0,0.7)] sm:p-8 lg:p-10">
+      <div className="rounded-3xl bg-white p-5 shadow-[0_50px_120px_-30px_rgba(0,0,0,0.7)] sm:p-8 lg:p-10">
         {/* index + open */}
         <div className="flex items-start justify-between">
           <span className="font-mono text-[12px] text-ink-700/35">{displayIndex ?? project.index}</span>
@@ -253,7 +253,7 @@ export default function SystemCard({ slug, displayIndex }: { slug: string; displ
             <p className="mt-5 text-[11px] font-medium uppercase tracking-widest text-gold-700">
               {project.category}
             </p>
-            <h3 className="mt-2.5 text-2xl font-medium leading-snug tracking-tight text-ink-900 sm:text-[27px]">
+            <h3 className="mt-2.5 text-[21px] font-medium leading-snug tracking-tight text-ink-900 sm:text-[27px]">
               {project.title}
             </h3>
             <p className="mt-3.5 text-[14px] leading-relaxed text-ink-700/60 sm:text-[15px]">
