@@ -75,12 +75,12 @@ export default function HeroV2() {
         </span>
 
         <h1 className="mt-6 animate-fade-up text-[clamp(34px,8.8vw,46px)] font-medium leading-[1.08] tracking-tight text-ink-900 [animation-delay:100ms] sm:text-6xl lg:text-[64px]">
-          Your business shouldn&rsquo;t run on copy and paste
+          AI Systems That Save Time and Grow Your Business.
         </h1>
 
         <p className="mt-5 max-w-xl animate-fade-up text-[14.5px] leading-relaxed text-ink-700/60 [animation-delay:200ms] sm:mt-6 sm:text-base">
-          Magni Automations gives you one team to design, build, and run the AI systems
-          that capture your leads, answer your calls, and publish your content, on autopilot.
+          Magni Automations designs and builds custom AI systems that remove bottlenecks,
+          convert more leads, and give your team hours back every week.
         </p>
 
         <div className="mt-7 flex w-full animate-fade-up flex-col items-center justify-center gap-3 [animation-delay:300ms] min-[420px]:w-auto min-[420px]:flex-row sm:mt-8">
