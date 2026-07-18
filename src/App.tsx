@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import Home from './pages/Home'
+import HomeV2 from './pages/HomeV2'
 import ProjectDetail from './pages/ProjectDetail'
 import ScrollProgress from './components/ScrollProgress'
 
@@ -19,6 +20,7 @@ function App() {
       <ScrollProgress />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/v2" element={<HomeV2 />} />
         <Route path="/work/:slug" element={<ProjectDetail />} />
       </Routes>
     </>
