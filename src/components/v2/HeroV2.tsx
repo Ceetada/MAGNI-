@@ -75,7 +75,7 @@ export default function HeroV2() {
         </span>
 
         <h1 className="mt-6 animate-fade-up text-[clamp(34px,8.8vw,46px)] font-medium leading-[1.08] tracking-tight text-ink-900 [animation-delay:100ms] sm:text-6xl lg:text-[64px]">
-          AI Systems That Save Time and Grow Your Business.
+          AI Systems That Save Time and Grow Your Business
         </h1>
 
         <p className="mt-5 max-w-xl animate-fade-up text-[14.5px] leading-relaxed text-ink-700/60 [animation-delay:200ms] sm:mt-6 sm:text-base">
