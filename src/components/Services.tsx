@@ -2,7 +2,7 @@ import { ArrowUpRight, Bot, Check, Compass, GraduationCap, Magnet, Sparkles, Wor
 import type { LucideIcon } from 'lucide-react'
 import Reveal from './Reveal'
 
-interface Service {
+export interface Service {
   title: string
   description: string
   points: string[]
@@ -10,7 +10,7 @@ interface Service {
   gradient: string
 }
 
-const SERVICES: Service[] = [
+export const SERVICES: Service[] = [
   {
     title: 'AI Automation Strategy',
     description:
@@ -53,7 +53,7 @@ const SERVICES: Service[] = [
   },
 ]
 
-const DEPARTMENTS = ['Sales', 'Customer Success', 'Onboarding', 'Operations']
+export const DEPARTMENTS = ['Sales', 'Customer Success', 'Onboarding', 'Operations']
 
 export default function Services() {
   return (

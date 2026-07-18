@@ -1,7 +1,7 @@
 import NavbarV2 from '../components/v2/NavbarV2'
 import HeroV2 from '../components/v2/HeroV2'
 import About from '../components/About'
-import Services from '../components/Services'
+import ServicesV2 from '../components/v2/ServicesV2'
 import FAQ from '../components/FAQ'
 import CTA from '../components/CTA'
 import Footer from '../components/Footer'
@@ -14,7 +14,7 @@ export default function HomeV2() {
       <NavbarV2 />
       <HeroV2 />
       <About />
-      <Services />
+      <ServicesV2 />
       <FAQ />
       <CTA />
       <Footer />
