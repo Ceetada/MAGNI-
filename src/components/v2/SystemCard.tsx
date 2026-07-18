@@ -51,8 +51,8 @@ function ContentVignette() {
           <div className="h-1.5 w-4/5 rounded bg-ink-900/[0.07]" />
           <div className="h-1.5 w-3/5 rounded bg-ink-900/[0.07]" />
         </div>
-        <div className="mt-3 flex h-20 items-center justify-center rounded-lg bg-gradient-to-br from-gold-200 via-gold-300 to-gold-500">
-          <ImagePlus className="h-5 w-5 text-white/90" />
+        <div className="mt-3 flex h-20 items-center justify-center rounded-lg bg-gradient-to-br from-ink-800 to-ink-950">
+          <ImagePlus className="h-5 w-5 text-white/70" />
         </div>
       </div>
 
@@ -100,10 +100,8 @@ function RealEstateVignette() {
         <p className="text-[10.5px] leading-relaxed text-ink-800">
           I found 3 listings that match. Want to book a viewing this weekend?
         </p>
-        <div className="mt-2 flex gap-1.5">
-          <span className="h-9 w-12 rounded-md bg-gradient-to-br from-ink-500 to-ink-800" />
-          <span className="h-9 w-12 rounded-md bg-gradient-to-br from-gold-400 to-gold-700" />
-          <span className="h-9 w-12 rounded-md bg-gradient-to-br from-ink-600 to-ink-900" />
+        <div className="mt-2 flex h-14 items-center justify-center rounded-lg bg-gradient-to-br from-ink-800 to-ink-950">
+          <ImagePlus className="h-4 w-4 text-white/70" />
         </div>
       </div>
 
