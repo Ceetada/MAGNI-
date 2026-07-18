@@ -152,46 +152,44 @@ export default function ServicesV2() {
           ))}
         </div>
 
-        {/* bespoke / custom capability band — one centered axis, calm and ordered */}
+        {/* bespoke / custom capability band — a slim centered strip */}
         <Reveal delay={120}>
-          <div className="relative mt-8 overflow-hidden rounded-3xl bg-white/[0.03] px-6 py-12 text-center ring-1 ring-white/10 sm:px-12 sm:py-16">
-            <div className="pointer-events-none absolute left-1/2 top-0 h-[220px] w-[520px] -translate-x-1/2 rounded-full bg-gold-500/[0.07] blur-[90px]" />
+          <div className="relative mt-8 overflow-hidden rounded-2xl bg-white/[0.03] px-6 py-9 text-center ring-1 ring-white/10 sm:px-10 sm:py-10">
+            <div className="pointer-events-none absolute left-1/2 top-0 h-[160px] w-[480px] -translate-x-1/2 rounded-full bg-gold-500/[0.07] blur-[80px]" />
 
             <div className="relative">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-gold-500/10 px-3 py-1.5 text-[12px] text-gold-400 ring-1 ring-gold-500/25">
-                <Sparkles className="h-3.5 w-3.5" />
+              <span className="inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.2em] text-gold-500/90">
+                <Sparkles className="h-3 w-3" />
                 Bespoke builds
               </span>
 
-              <h3 className="mx-auto mt-5 max-w-xl text-2xl font-medium leading-tight tracking-tight text-white sm:text-[32px]">
-                Something specific in mind?
-                <br />
-                We build it.
+              <h3 className="mx-auto mt-3 text-xl font-medium tracking-tight text-white sm:text-[26px]">
+                Something specific in mind? We build it.
               </h3>
 
-              <p className="mx-auto mt-4 max-w-xl text-[14.5px] leading-relaxed text-white/50 sm:text-[15px]">
-                Beyond our core services, we design bespoke AI automations for whatever comes next,
-                improve the workflows you already run, and spot new opportunities across your business.
+              <p className="mx-auto mt-2.5 max-w-lg text-[13.5px] leading-relaxed text-white/50 sm:text-[14px]">
+                Beyond our core services, we design bespoke AI automations for whatever your
+                business needs next.
               </p>
 
-              <div className="mt-7 flex flex-wrap items-center justify-center gap-2">
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
                 {DEPARTMENTS.map((dept) => (
                   <span
                     key={dept}
-                    className="rounded-full bg-white/5 px-3.5 py-1.5 text-[12.5px] text-white/70 ring-1 ring-white/10"
+                    className="rounded-full bg-white/5 px-3 py-1.5 text-[12px] text-white/60 ring-1 ring-white/10"
                   >
                     {dept}
                   </span>
                 ))}
+                <span className="mx-1 hidden h-4 w-px bg-white/15 sm:block" />
+                <a
+                  href="#contact"
+                  className="group inline-flex items-center gap-1.5 rounded-full bg-gold-500 px-5 py-2 text-[13px] font-medium text-ink-950 transition-all duration-300 hover:-translate-y-0.5 hover:bg-gold-400 hover:shadow-[0_10px_28px_rgba(245,168,28,0.4)]"
+                >
+                  Discuss your build
+                  <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </a>
               </div>
-
-              <a
-                href="#contact"
-                className="group mt-9 inline-flex items-center gap-2 rounded-full bg-gold-500 px-7 py-3 text-sm font-medium text-ink-950 transition-all duration-300 hover:-translate-y-0.5 hover:bg-gold-400 hover:shadow-[0_12px_32px_rgba(245,168,28,0.45)]"
-              >
-                Discuss your build
-                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </a>
             </div>
           </div>
         </Reveal>
