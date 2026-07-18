@@ -224,8 +224,9 @@ const VIGNETTES: Record<string, () => React.ReactElement> = {
 
 /** White showcase card for one built system, shown on the v2 dark stage.
  *  Left: the classic project card content. Right: a bespoke mini-mock of
- *  what the system actually does. */
-export default function SystemCard({ slug }: { slug: string }) {
+ *  what the system actually does. `displayIndex` follows the tab order so
+ *  the numbering reads 01–04 left to right. */
+export default function SystemCard({ slug, displayIndex }: { slug: string; displayIndex?: string }) {
   const project = getProjectBySlug(slug)
   if (!project) return null
   const Vignette = VIGNETTES[slug]
@@ -235,7 +236,7 @@ export default function SystemCard({ slug }: { slug: string }) {
       <div className="rounded-3xl bg-white p-6 shadow-[0_50px_120px_-30px_rgba(0,0,0,0.7)] sm:p-8 lg:p-10">
         {/* index + open */}
         <div className="flex items-start justify-between">
-          <span className="font-mono text-[12px] text-ink-700/35">{project.index}</span>
+          <span className="font-mono text-[12px] text-ink-700/35">{displayIndex ?? project.index}</span>
           <Link
             to={`/work/${project.slug}`}
             aria-label={`Open ${project.title} case study`}

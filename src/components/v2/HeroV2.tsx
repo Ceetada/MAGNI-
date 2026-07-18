@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { LayoutGrid, MessageSquareText, PhoneCall, ReceiptText, Workflow } from 'lucide-react'
-import DashboardMockup from './DashboardMockup'
+import OverviewPanel from './OverviewPanel'
 import SystemCard from './SystemCard'
 
 const TABS = [
@@ -10,6 +10,9 @@ const TABS = [
   { label: 'Content Engine', icon: Workflow, slug: 'social-media-content-automation' },
   { label: 'Expense Ops', icon: ReceiptText, slug: 'ai-expense-tracker' },
 ]
+
+/** The four systems in tab order — numbering on stage follows this order. */
+const SYSTEMS = TABS.slice(1).map((tab) => ({ label: tab.label, slug: tab.slug! }))
 
 /** Vertical measurement ruler along the hero edges — a quiet drafting-table
  *  detail. `side` flips which way the tick marks point. */
@@ -90,10 +93,10 @@ export default function HeroV2() {
           <div className="animate-hero-rise relative mx-auto max-w-5xl [animation-delay:400ms]">
             {active === 0 ? (
               <div key="overview" className="animate-fade-up">
-                <DashboardMockup />
+                <OverviewPanel systems={SYSTEMS} onSelect={setActive} />
               </div>
             ) : (
-              <SystemCard slug={TABS[active].slug!} />
+              <SystemCard slug={TABS[active].slug!} displayIndex={String(active).padStart(2, '0')} />
             )}
           </div>
         </div>
