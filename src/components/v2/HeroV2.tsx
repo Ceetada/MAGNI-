@@ -1,13 +1,15 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { LayoutGrid, MessageSquareText, PhoneCall, ReceiptText, Workflow } from 'lucide-react'
+import { ArrowRight, LayoutGrid, MessageSquareText, PhoneCall, ReceiptText, Workflow } from 'lucide-react'
+import { getProjectBySlug } from '../../data/projects'
 import DashboardMockup from './DashboardMockup'
 
 const TABS = [
-  { label: 'Overview', icon: LayoutGrid, hash: '#about' },
-  { label: 'Lead Automation', icon: MessageSquareText, to: '/work/real-estate-lead-automation' },
-  { label: 'Voice Agents', icon: PhoneCall, to: '/work/ai-voice-receptionist' },
-  { label: 'Content Engine', icon: Workflow, to: '/work/social-media-content-automation' },
-  { label: 'Expense Ops', icon: ReceiptText, to: '/work/ai-expense-tracker' },
+  { label: 'Overview', icon: LayoutGrid },
+  { label: 'Lead Automation', icon: MessageSquareText, slug: 'real-estate-lead-automation' },
+  { label: 'Voice Agents', icon: PhoneCall, slug: 'ai-voice-receptionist' },
+  { label: 'Content Engine', icon: Workflow, slug: 'social-media-content-automation' },
+  { label: 'Expense Ops', icon: ReceiptText, slug: 'ai-expense-tracker' },
 ]
 
 /** Vertical measurement ruler along the hero edges — a quiet drafting-table
@@ -30,7 +32,39 @@ function Ruler({ side }: { side: 'left' | 'right' }) {
   )
 }
 
+/** One of the four built systems, shown in place on the dark stage. */
+function SystemShowcase({ slug }: { slug: string }) {
+  const project = getProjectBySlug(slug)
+  if (!project) return null
+  const Diagram = project.diagram
+
+  return (
+    <div key={slug} className="animate-fade-up">
+      <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <span className="text-[11px] font-medium uppercase tracking-widest text-gold-500/90">
+            {project.index} · {project.category}
+          </span>
+          <h3 className="mt-1.5 text-lg font-medium leading-snug text-white sm:text-xl">{project.title}</h3>
+          <p className="mt-1.5 max-w-xl text-[13px] leading-relaxed text-white/50 sm:text-sm">
+            {project.tagline}
+          </p>
+        </div>
+        <Link
+          to={`/work/${project.slug}`}
+          className="group inline-flex shrink-0 items-center gap-1.5 text-[13px] font-medium text-gold-400 transition-colors hover:text-gold-300"
+        >
+          View case study
+          <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+        </Link>
+      </div>
+      {Diagram && <Diagram />}
+    </div>
+  )
+}
+
 export default function HeroV2() {
+  const [active, setActive] = useState(0)
   const scrollTo = (hash: string) => document.querySelector(hash)?.scrollIntoView({ behavior: 'smooth' })
 
   return (
@@ -71,8 +105,8 @@ export default function HeroV2() {
         </div>
       </div>
 
-      {/* dark stage with notched tab tongue */}
-      <div className="relative">
+      {/* dark stage with notched tab tongue — tabs switch the showcase in place */}
+      <div id="work" className="relative scroll-mt-24">
         <div
           className="relative mx-2 rounded-t-[28px] bg-ink-950 px-3 pb-8 pt-24 sm:mx-4 sm:rounded-t-[36px] sm:px-8 sm:pb-12 sm:pt-28 lg:px-12"
           style={{
@@ -86,7 +120,13 @@ export default function HeroV2() {
           <div className="pointer-events-none absolute left-1/2 top-10 h-[280px] w-[640px] -translate-x-1/2 rounded-full bg-gold-500/10 blur-[110px]" />
 
           <div className="animate-hero-rise relative mx-auto max-w-5xl [animation-delay:400ms]">
-            <DashboardMockup />
+            {active === 0 ? (
+              <div key="overview" className="animate-fade-up">
+                <DashboardMockup />
+              </div>
+            ) : (
+              <SystemShowcase slug={TABS[active].slug!} />
+            )}
           </div>
         </div>
 
@@ -110,31 +150,21 @@ export default function HeroV2() {
               style={{ scrollbarWidth: 'none' }}
               aria-label="Explore Magni systems"
             >
-              {TABS.map((tab, i) =>
-                tab.to ? (
-                  <Link
-                    key={tab.label}
-                    to={tab.to}
-                    className="flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-3.5 py-2 text-[12.5px] text-ink-700/60 transition-colors hover:text-ink-900"
-                  >
-                    <tab.icon className="h-3.5 w-3.5" />
-                    {tab.label}
-                  </Link>
-                ) : (
-                  <button
-                    key={tab.label}
-                    onClick={() => scrollTo(tab.hash!)}
-                    className={`flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-3.5 py-2 text-[12.5px] transition-colors ${
-                      i === 0
-                        ? 'bg-white font-medium text-ink-900 shadow-sm ring-1 ring-ink-900/5'
-                        : 'text-ink-700/60 hover:text-ink-900'
-                    }`}
-                  >
-                    <tab.icon className="h-3.5 w-3.5" />
-                    {tab.label}
-                  </button>
-                ),
-              )}
+              {TABS.map((tab, i) => (
+                <button
+                  key={tab.label}
+                  onClick={() => setActive(i)}
+                  aria-pressed={active === i}
+                  className={`flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-3.5 py-2 text-[12.5px] transition-colors ${
+                    active === i
+                      ? 'bg-white font-medium text-ink-900 shadow-sm ring-1 ring-ink-900/5'
+                      : 'text-ink-700/60 hover:text-ink-900'
+                  }`}
+                >
+                  <tab.icon className="h-3.5 w-3.5" />
+                  {tab.label}
+                </button>
+              ))}
             </nav>
           </div>
         </div>
