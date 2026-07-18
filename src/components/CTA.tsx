@@ -3,8 +3,18 @@ import Reveal from './Reveal'
 
 export default function CTA() {
   return (
-    <section id="contact" className="relative bg-white px-5 py-24 sm:px-8 sm:py-32 lg:px-10">
-      <Reveal className="mx-auto max-w-3xl [perspective:1400px]">
+    <section id="contact" className="relative bg-ink-950 px-5 py-24 sm:px-8 sm:py-32 lg:px-10">
+      {/* faint star speckles to match the other dark sections */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage:
+            'radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1.5px), radial-gradient(rgba(245,168,28,0.1) 1px, transparent 1.5px)',
+          backgroundSize: '56px 56px, 104px 104px',
+          backgroundPosition: '0 0, 28px 41px',
+        }}
+      />
+      <Reveal className="relative mx-auto max-w-3xl [perspective:1400px]">
         <div className="group/deck relative origin-bottom">
           {/* deck layers tucked behind, fanning out on hover */}
           <div
@@ -17,7 +27,7 @@ export default function CTA() {
           />
 
           {/* front card */}
-          <div className="relative z-10 overflow-hidden rounded-3xl bg-gradient-to-b from-ink-900 to-ink-950 px-6 py-14 text-center shadow-[0_40px_100px_-20px_rgba(12,13,16,0.45)] transition-shadow duration-500 group-hover/deck:animate-[deck-wiggle_0.6s_ease-in-out] group-hover/deck:shadow-[0_50px_120px_-20px_rgba(12,13,16,0.6)] sm:px-14 sm:py-20">
+          <div className="relative z-10 overflow-hidden rounded-3xl bg-gradient-to-b from-ink-900 to-ink-950 px-6 py-14 text-center ring-1 ring-white/10 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.8)] transition-shadow duration-500 group-hover/deck:animate-[deck-wiggle_0.6s_ease-in-out] group-hover/deck:shadow-[0_50px_120px_-20px_rgba(0,0,0,0.9)] sm:px-14 sm:py-20">
             {/* inner glow + grid */}
             <div className="pointer-events-none absolute left-1/2 top-0 h-[300px] w-[600px] -translate-x-1/2 rounded-full bg-gold-500/15 blur-[100px]" />
             <div className="grid-fade-dark pointer-events-none absolute inset-0 opacity-70" />
