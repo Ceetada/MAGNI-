@@ -1,8 +1,7 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { ArrowRight, LayoutGrid, MessageSquareText, PhoneCall, ReceiptText, Workflow } from 'lucide-react'
-import { getProjectBySlug } from '../../data/projects'
+import { LayoutGrid, MessageSquareText, PhoneCall, ReceiptText, Workflow } from 'lucide-react'
 import DashboardMockup from './DashboardMockup'
+import SystemCard from './SystemCard'
 
 const TABS = [
   { label: 'Overview', icon: LayoutGrid },
@@ -28,37 +27,6 @@ function Ruler({ side }: { side: 'left' | 'right' }) {
           <span className="h-px w-3 bg-ink-900/20" />
         </span>
       ))}
-    </div>
-  )
-}
-
-/** One of the four built systems, shown in place on the dark stage. */
-function SystemShowcase({ slug }: { slug: string }) {
-  const project = getProjectBySlug(slug)
-  if (!project) return null
-  const Diagram = project.diagram
-
-  return (
-    <div key={slug} className="animate-fade-up">
-      <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <span className="text-[11px] font-medium uppercase tracking-widest text-gold-500/90">
-            {project.index} · {project.category}
-          </span>
-          <h3 className="mt-1.5 text-lg font-medium leading-snug text-white sm:text-xl">{project.title}</h3>
-          <p className="mt-1.5 max-w-xl text-[13px] leading-relaxed text-white/50 sm:text-sm">
-            {project.tagline}
-          </p>
-        </div>
-        <Link
-          to={`/work/${project.slug}`}
-          className="group inline-flex shrink-0 items-center gap-1.5 text-[13px] font-medium text-gold-400 transition-colors hover:text-gold-300"
-        >
-          View case study
-          <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-        </Link>
-      </div>
-      {Diagram && <Diagram />}
     </div>
   )
 }
@@ -125,7 +93,7 @@ export default function HeroV2() {
                 <DashboardMockup />
               </div>
             ) : (
-              <SystemShowcase slug={TABS[active].slug!} />
+              <SystemCard slug={TABS[active].slug!} />
             )}
           </div>
         </div>
