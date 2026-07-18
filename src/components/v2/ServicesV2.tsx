@@ -3,23 +3,23 @@ import { ArrowUpRight, Check, Sparkles } from 'lucide-react'
 import Reveal from '../Reveal'
 import { DEPARTMENTS, SERVICES } from '../Services'
 
-/** Base offset (px) where the first card pins, clearing the fixed navbar. */
-const STICK_BASE = 104
-/** Each subsequent card pins this much lower, leaving a sliver of the one beneath. */
-const STICK_STEP = 14
-
 /** v2 services: a black section where each service is a wide white card that
  *  pins and lets the next one lap over it — same deck mechanic as the
- *  original work section, retuned for the dark background. On phones the
- *  cards are too tall to stack, so the deck degrades to a plain list. */
+ *  original work section, retuned for the dark background. Pin offsets and
+ *  shade are tuned per breakpoint so the stack works on phones too. */
 export default function ServicesV2() {
   const cardsRef = useRef<(HTMLDivElement | null)[]>([])
   const shadeRef = useRef<(HTMLDivElement | null)[]>([])
-  const [deck, setDeck] = useState(true)
+  const [compact, setCompact] = useState(false)
+
+  /** Where the first card pins (clearing the fixed navbar) and how much lower
+   *  each subsequent card pins. The navbar is 64px tall on phones. */
+  const stickBase = compact ? 78 : 104
+  const stickStep = compact ? 10 : 14
 
   useEffect(() => {
-    const mq = window.matchMedia('(min-width: 640px)')
-    const update = () => setDeck(mq.matches)
+    const mq = window.matchMedia('(max-width: 639px)')
+    const update = () => setCompact(mq.matches)
     update()
     mq.addEventListener('change', update)
     return () => mq.removeEventListener('change', update)
@@ -27,22 +27,16 @@ export default function ServicesV2() {
 
   useEffect(() => {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const cards = cardsRef.current
-    if (reduce || !deck) {
-      cards.forEach((card, i) => {
-        if (card) card.style.transform = ''
-        const shade = shadeRef.current[i]
-        if (shade) shade.style.opacity = '0'
-      })
-      return
-    }
+    if (reduce) return
 
     let frame = 0
     const clamp = (n: number) => Math.min(1, Math.max(0, n))
+    const maxShade = compact ? 0.4 : 0.55
 
     const onScroll = () => {
       cancelAnimationFrame(frame)
       frame = requestAnimationFrame(() => {
+        const cards = cardsRef.current
         cards.forEach((card, i) => {
           const next = cards[i + 1]
           const shade = shadeRef.current[i]
@@ -52,13 +46,13 @@ export default function ServicesV2() {
             if (shade) shade.style.opacity = '0'
             return
           }
-          const stickTop = STICK_BASE + i * STICK_STEP
+          const stickTop = stickBase + i * stickStep
           const nextTop = next.getBoundingClientRect().top
           const start = stickTop + card.offsetHeight
           const p = clamp((start - nextTop) / (start - stickTop))
           // tuck the covered card back and shade it as the next laps over
           card.style.transform = `translateY(${-p * 16}px) scale(${1 - p * 0.07})`
-          if (shade) shade.style.opacity = `${p * 0.55}`
+          if (shade) shade.style.opacity = `${p * maxShade}`
         })
       })
     }
@@ -71,7 +65,7 @@ export default function ServicesV2() {
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onScroll)
     }
-  }, [deck])
+  }, [compact, stickBase, stickStep])
 
   return (
     <section id="services" className="relative bg-ink-950 py-16 sm:py-32">
@@ -104,13 +98,13 @@ export default function ServicesV2() {
           </p>
         </Reveal>
 
-        {/* deck of service cards: sticky-stacked on sm+, a plain list on phones */}
+        {/* sticky deck of service cards */}
         <div className="mt-10 sm:mt-16">
           {SERVICES.map((service, i) => (
             <div
               key={service.title}
-              className={deck ? 'sticky pb-5' : 'pb-4'}
-              style={deck ? { top: STICK_BASE + i * STICK_STEP, zIndex: i + 1 } : undefined}
+              className="sticky pb-4 sm:pb-5"
+              style={{ top: stickBase + i * stickStep, zIndex: i + 1 }}
             >
               <div
                 ref={(el) => {
