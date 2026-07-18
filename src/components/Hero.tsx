@@ -1,4 +1,4 @@
-import { ArrowRight, Sparkles } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import HeroBackgroundScenic from './HeroBackgroundScenic'
 import HeroFlow from './HeroFlow'
 
@@ -11,12 +11,7 @@ export default function Hero() {
       <div className="h-[64px] shrink-0 sm:h-[76px]" />
 
       <div className="flex flex-1 shrink-0 flex-col items-center justify-center px-5 text-center">
-        <span className="animate-fade-up inline-flex items-center gap-1.5 rounded-full bg-white px-3.5 py-1.5 text-[12px] text-ink-700/80 shadow-sm ring-1 ring-ink-900/10">
-          <Sparkles className="h-3.5 w-3.5 text-gold-500" />
-          AI Automation Agency
-        </span>
-
-        <h1 className="mt-5 max-w-4xl text-[38px] font-medium leading-[1.08] tracking-tight text-ink-900 min-[400px]:text-[44px] sm:text-6xl lg:text-7xl">
+        <h1 className="max-w-4xl text-[38px] font-medium leading-[1.08] tracking-tight text-ink-900 min-[400px]:text-[44px] sm:text-6xl lg:text-7xl">
           <span className="block animate-fade-up">We Build AI Systems That</span>
           <span className="block animate-fade-up text-gold-700 [animation-delay:120ms]">
             Save Time, Capture Leads,
