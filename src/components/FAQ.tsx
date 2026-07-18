@@ -54,7 +54,7 @@ export default function FAQ() {
             const isOpen = open === i
             return (
               <Reveal key={item.q} delay={i * 60}>
-                <div className="overflow-hidden rounded-2xl bg-[#f7f7f8] ring-1 ring-ink-900/5 transition-colors hover:ring-gold-500/20">
+                <div className="overflow-hidden rounded-2xl bg-white shadow-[0_1px_3px_rgba(12,13,16,0.06)] ring-1 ring-ink-900/10 transition-all hover:shadow-[0_8px_24px_-12px_rgba(12,13,16,0.12)] hover:ring-gold-500/30">
                   <button
                     type="button"
                     onClick={() => setOpen(isOpen ? null : i)}

@@ -32,9 +32,6 @@ const PRINCIPLES = [
 export default function About() {
   return (
     <section id="about" className="relative overflow-hidden bg-white py-24 sm:py-32">
-      <div className="pointer-events-none absolute -right-40 top-0 h-[420px] w-[420px] rounded-full bg-gold-300/20 blur-[130px]" />
-      <div className="pointer-events-none absolute -left-40 bottom-0 h-[360px] w-[360px] rounded-full bg-gold-400/10 blur-[130px]" />
-
       <div className="relative mx-auto max-w-6xl px-5 sm:px-8 lg:px-10">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           {/* left: heading + stats, pinned on desktop */}
