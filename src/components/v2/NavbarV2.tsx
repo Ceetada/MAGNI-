@@ -4,8 +4,8 @@ import { Menu, X } from 'lucide-react'
 import Logo from '../Logo'
 
 const NAV_LINKS = [
-  { label: 'About', hash: '#about' },
   { label: 'Work', hash: '#work' },
+  { label: 'About', hash: '#about' },
   { label: 'Services', hash: '#services' },
   { label: 'FAQ', hash: '#faq' },
 ]
