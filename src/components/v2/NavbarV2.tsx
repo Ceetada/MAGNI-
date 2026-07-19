@@ -40,7 +40,7 @@ export default function NavbarV2() {
       }`}
     >
       <div className="relative mx-auto flex max-w-7xl items-center justify-between px-5 py-3.5 sm:px-8 lg:px-10">
-        <Link to="/v2" className="transition-opacity hover:opacity-80" aria-label="Magni Automations home">
+        <Link to="/" className="transition-opacity hover:opacity-80" aria-label="Magni Automations home">
           <Logo />
         </Link>
 

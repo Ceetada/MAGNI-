@@ -28,12 +28,14 @@ export default function Navbar() {
 
   const goToSection = (hash: string) => {
     setOpen(false)
-    if (location.pathname !== '/') {
-      navigate('/' + hash)
+    // scroll in place when the section exists on this page (home or /classic);
+    // otherwise head to the homepage and let it scroll to the hash
+    const el = document.querySelector(hash)
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' })
       return
     }
-    const el = document.querySelector(hash)
-    el?.scrollIntoView({ behavior: 'smooth' })
+    navigate('/' + hash)
   }
 
   return (
