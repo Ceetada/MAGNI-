@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
-import LogoAnimated from '../LogoAnimated'
+import Logo from '../Logo'
 
 const NAV_LINKS = [
   { label: 'Work', hash: '#work' },
@@ -41,7 +41,7 @@ export default function NavbarV2() {
     >
       <div className="relative mx-auto flex max-w-7xl items-center justify-between px-5 py-3.5 sm:px-8 lg:px-10">
         <Link to="/" className="transition-opacity hover:opacity-80" aria-label="Magni Automations home">
-          <LogoAnimated />
+          <Logo />
         </Link>
 
         {/* centered links, Aspect-style */}
